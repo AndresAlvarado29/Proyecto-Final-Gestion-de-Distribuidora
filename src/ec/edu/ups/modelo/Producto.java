@@ -5,10 +5,133 @@
  */
 package ec.edu.ups.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author HI andres
  */
 public class Producto {
+    
+    /**
+    * Atributos que se utilizaran en los diferentes metodos de gestion de
+    * informacion.
+    */
+    private int Stock;
+    private String nombreDelProducto;
+    private String codigoDelProducto;
+    private double precio;
+    private String fechaDeElaboracion;
+    private String fechaDeCaducidad;
+    private String marca;
+    
+    //Constructor sin parametros
+
+    public Producto() {
+        
+    }
+    
+    //Constructor con parametros
+
+    public Producto(int Stock, String nombreDelProducto, String codigoDelProducto, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
+        this.Stock = Stock;
+        this.nombreDelProducto = nombreDelProducto;
+        this.codigoDelProducto = codigoDelProducto;
+        this.precio = precio;
+        this.fechaDeElaboracion = fechaDeElaboracion;
+        this.fechaDeCaducidad = fechaDeCaducidad;
+        this.marca = marca;
+    }
+    
+    //Getters and setters
+
+    public int getStock() {
+        return Stock;
+    }
+
+    public void setStock(int Stock) {
+        this.Stock = Stock;
+    }
+
+    public String getNombreDelProducto() {
+        return nombreDelProducto;
+    }
+
+    public void setNombreDelProducto(String nombreDelProducto) {
+        this.nombreDelProducto = nombreDelProducto;
+    }
+
+    public String getCodigoDelProducto() {
+        return codigoDelProducto;
+    }
+
+    public void setCodigoDelProducto(String codigoDelProducto) {
+        this.codigoDelProducto = codigoDelProducto;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getFechaDeElaboracion() {
+        return fechaDeElaboracion;
+    }
+
+    public void setFechaDeElaboracion(String fechaDeElaboracion) {
+        this.fechaDeElaboracion = fechaDeElaboracion;
+    }
+
+    public String getFechaDeCaducidad() {
+        return fechaDeCaducidad;
+    }
+
+    public void setFechaDeCaducidad(String fechaDeCaducidad) {
+        this.fechaDeCaducidad = fechaDeCaducidad;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
+    //Hashcode y equals
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.codigoDelProducto);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        if (!Objects.equals(this.codigoDelProducto, other.codigoDelProducto)) {
+            return false;
+        }
+        return true;
+    }
+    
+    //toString
+    @Override
+    public String toString() {
+        return "Producto{" + "Stock=" + Stock + ", nombreDelProducto=" + nombreDelProducto + ", codigoDelProducto=" + codigoDelProducto + ", precio=" + precio + ", fechaDeElaboracion=" + fechaDeElaboracion + ", fechaDeCaducidad=" + fechaDeCaducidad + ", marca=" + marca + '}';
+    }
     
 }
