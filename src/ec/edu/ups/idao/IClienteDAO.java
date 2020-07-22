@@ -9,6 +9,6 @@ package ec.edu.ups.idao;
  *
  * @author HI andres
  */
-public class IClienteDAO {
+public interface IClienteDAO {
     
 }
