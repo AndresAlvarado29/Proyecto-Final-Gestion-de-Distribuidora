@@ -5,10 +5,16 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Factura;
+
 /**
  *
  * @author HI andres
  */
 public interface IFacturaDAO {
-    
+    //Metodos CRUD
+    public void create(Factura factura);
+    public Factura read(String numero);
+    public void update(Factura factura);
+    public void delete(Factura factura);
 }

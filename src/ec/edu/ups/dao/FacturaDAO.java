@@ -5,10 +5,33 @@
  */
 package ec.edu.ups.dao;
 
+import ec.edu.ups.idao.IFacturaDAO;
+import ec.edu.ups.modelo.Factura;
+
 /**
  *
  * @author HI andres
  */
-public class FacturaDAO {
+public class FacturaDAO implements IFacturaDAO {
+
+    @Override
+    public void create(Factura factura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Factura read(String numero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Factura factura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Factura factura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

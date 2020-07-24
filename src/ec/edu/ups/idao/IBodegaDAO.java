@@ -5,10 +5,17 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Bodega;
+
 /**
  *
  * @author HI andres
  */
 public interface IBodegaDAO {
+    //Metodos CRUD
+    public void create(Bodega bodeja);
+    public Bodega read(String codigo);
+    public void update(Bodega bodega);
+    public void delete(Bodega bodega);
     
 }

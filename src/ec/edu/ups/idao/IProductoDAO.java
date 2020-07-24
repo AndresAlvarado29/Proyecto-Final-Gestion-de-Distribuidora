@@ -5,10 +5,16 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Producto;
+
 /**
  *
  * @author HI andres
  */
 public interface IProductoDAO {
-    
+    //Metodos CRUD
+    public void create(Producto producto);
+    public Producto read(String codigo);
+    public void update(Producto producto);
+    public void delete(Producto producto);
 }

@@ -5,10 +5,16 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Cliente;
+
 /**
  *
  * @author HI andres
  */
 public interface IClienteDAO {
-    
+    //Metodos CRUD
+    public void create(Cliente cliente);
+    public Cliente read(String ruc);
+    public void update(Cliente cliente);
+    public void delete(Cliente cliente);
 }

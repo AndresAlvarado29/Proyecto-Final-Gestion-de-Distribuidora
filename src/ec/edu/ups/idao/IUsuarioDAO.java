@@ -5,10 +5,16 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Usuario;
+
 /**
  *
  * @author HI andres
  */
 public interface IUsuarioDAO {
-    
+    //Metodos CRUD
+    public void create(Usuario usuario);
+    public Usuario read(String cedula);
+    public void update(Usuario usuario);
+    public void delete(Usuario usuario);
 }
