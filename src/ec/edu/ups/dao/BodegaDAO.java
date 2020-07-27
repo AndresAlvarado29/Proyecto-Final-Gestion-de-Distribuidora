@@ -7,6 +7,8 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IBodegaDAO;
 import ec.edu.ups.modelo.Bodega;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 /**
  *
@@ -14,9 +16,23 @@ import ec.edu.ups.modelo.Bodega;
  */
 public class BodegaDAO implements IBodegaDAO {
 
+    //archivo binario
+    private RandomAccessFile archivo;
+    
+    
     @Override
-    public void create(Bodega bodeja) {
+    public void create(Bodega bodega) {
+        try {
+            archivo.seek(archivo.length());
+            archivo.writeUTF(bodega.getNombre());
+            archivo.writeUTF(bodega.getDireccion());
+            archivo.writeUTF(bodega.getTelefono());
+            
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
+            e.printStackTrace();
 
+        }
         
     }
 

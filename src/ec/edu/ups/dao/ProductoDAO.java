@@ -42,7 +42,19 @@ public class ProductoDAO implements IProductoDAO{
     
     @Override
     public void create(Producto producto) {
-        
+         try {
+            archivo.seek(archivo.length());
+            archivo.writeUTF(producto.getNombreDelProducto());
+            archivo.writeUTF(producto.getDescripcion());
+            archivo.writeUTF(producto.getMarca());
+            archivo.writeUTF(producto.getFechaDeElaboracion());
+            archivo.writeUTF(producto.getFechaDeCaducidad());
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
+            e.printStackTrace();
+
+        }
     }
 
     @Override
