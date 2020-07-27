@@ -7,26 +7,79 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IUsuarioDAO;
 import ec.edu.ups.modelo.Usuario;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 /**
  *
  * @author HI andres
  */
 public class UsuarioDAO implements IUsuarioDAO {
+    
+     //archivo binario
+    private RandomAccessFile archivo;
+
+    //Constructor
+    public UsuarioDAO() {
+        try {
+            archivo = new RandomAccessFile("Datos/Usuarios.dat", "rw");
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura");
+            e.printStackTrace();
+
+        }
+    }
 
     @Override
     public void create(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            archivo.seek(archivo.length());
+            archivo.writeUTF(usuario.getCedula());
+            archivo.writeUTF(usuario.getNombre());
+            archivo.writeUTF(usuario.getApellido());
+            archivo.writeUTF(usuario.getCorreo());
+            archivo.writeUTF(usuario.getContraseña());
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
+            e.printStackTrace();
+
+        }
+
     }
 
     @Override
     public Usuario read(String cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public void update(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String cedulaArchivo = archivo.readUTF();
+                
+                if (usuario.getCedula().equals(cedulaArchivo)) {
+                    archivo.writeUTF(usuario.getNombre());
+                    archivo.writeUTF(usuario.getApellido());
+                    archivo.writeUTF(usuario.getCorreo());
+                    archivo.writeUTF(usuario.getContraseña());
+                    break;
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (update: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
     }
 
     @Override

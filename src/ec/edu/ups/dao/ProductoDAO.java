@@ -7,16 +7,23 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IProductoDAO;
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.idao.IUsuarioDAO;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author HI andres
  */
 public class ProductoDAO implements IProductoDAO{
+    
+    
 
     @Override
     public void create(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
