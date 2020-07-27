@@ -19,6 +19,19 @@ import ec.edu.ups.idao.IUsuarioDAO;
  */
 public class ClienteDAO implements IClienteDAO{
     
+    /**
+     * Tamaño del archivo:
+     *
+     * nombre  25 caracteres 
+     * RUC  13 caracteres 
+     * direccion 30 caracteres 
+     * telefono  15 caracteres 
+     * correo  50 caracteres
+     * codigo 
+     * 
+     * Total  123 bytes + 10 bytes extras = 133 bytes por registro
+     *
+     */
     private RandomAccessFile archivo;
     private int codigo;
     private IUsuarioDAO usuarioDAO;
@@ -44,17 +57,18 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public Cliente read(String ruc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+
     }
 
     @Override
     public void update(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void delete(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
     
 }

@@ -18,6 +18,7 @@ public class Producto {
     * informacion.
     */
     private int Stock;
+    private String descripcion;
     private String nombreDelProducto;
     private String codigoDelProducto;
     private double precio;
@@ -33,7 +34,7 @@ public class Producto {
     
     //Constructor con parametros
 
-    public Producto(int Stock, String nombreDelProducto, String codigoDelProducto, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
+    public Producto(int Stock,String descripcion, String nombreDelProducto, String codigoDelProducto, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
         this.Stock = Stock;
         this.nombreDelProducto = nombreDelProducto;
         this.codigoDelProducto = codigoDelProducto;
@@ -41,6 +42,8 @@ public class Producto {
         this.fechaDeElaboracion = fechaDeElaboracion;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.marca = marca;
+        this.descripcion = descripcion;
+        
     }
     
     //Getters and setters
@@ -100,6 +103,16 @@ public class Producto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
     
     //Hashcode y equals
 

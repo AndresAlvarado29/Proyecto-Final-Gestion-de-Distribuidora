@@ -16,6 +16,20 @@ import java.io.RandomAccessFile;
  */
 public class UsuarioDAO implements IUsuarioDAO {
     
+    /**
+     * Tamaño del archivo:
+     *
+     * cedula  10 caracteres 
+     * nombre  25 caracteres 
+     * apellido 25 caracteres 
+     * correo  50 caracteres 
+     * contraseña  8 caracteres
+     *
+     * Total  118 bytes + 10 bytes extras = 128 bytes por registro
+     *
+     */
+    
+    
      //archivo binario
     private RandomAccessFile archivo;
 

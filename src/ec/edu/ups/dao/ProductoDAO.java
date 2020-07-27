@@ -19,8 +19,27 @@ import java.util.List;
  */
 public class ProductoDAO implements IProductoDAO{
     
+    /**
+     * Tamaño del archivo:
+     *
+     * stock  10 caracteres 
+     * nombre  25 caracteres 
+     * codigo 10 caracteres 
+     * precio  50 caracteres 
+     * marca  10 caracteres
+     * Fecha de Elaboracion 12 caracteres
+     * fecha de caducidad 12 caracteres
+     * descripcion 40 caracteres
+     *
+     * Total  169 bytes + 10 bytes extras = 179 bytes por registro
+     *
+     */
     
-
+    
+    //archivo binario
+    private RandomAccessFile archivo;
+    
+    
     @Override
     public void create(Producto producto) {
         
@@ -28,17 +47,18 @@ public class ProductoDAO implements IProductoDAO{
 
     @Override
     public Producto read(String codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+
     }
 
     @Override
     public void update(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void delete(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
     
 }

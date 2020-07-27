@@ -7,6 +7,7 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IFacturaDAO;
 import ec.edu.ups.modelo.Factura;
+import java.io.RandomAccessFile;
 
 /**
  *
@@ -14,24 +15,42 @@ import ec.edu.ups.modelo.Factura;
  */
 public class FacturaDAO implements IFacturaDAO {
 
+     /**
+     * Tamaño del archivo:
+     *
+     * fechaDeSalida 12 caracteres
+     * RUC 13 caracteres
+     * DireccionAdministracion 25 cracteres
+     * TelefonoAdministracion 15 caracteres
+     * EstadoDeFactura 12  caracteres
+     *
+     * Total  82 bytes + 10 bytes extras = 92 bytes por registro
+     *
+     */
+     
+    //archivo binario
+    private RandomAccessFile archivo;
+    
+    
     @Override
     public void create(Factura factura) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public Factura read(String numero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+
     }
 
     @Override
     public void update(Factura factura) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void delete(Factura factura) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
     
 }
