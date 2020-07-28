@@ -86,6 +86,30 @@ public class Factura {
         this.EstadoDeFactura = EstadoDeFactura;
     }
     
+     public String validarEspacios(String cadena, int longitud) {
+        if (cadena.length() == longitud) {
+            return cadena;
+
+        } else {
+            if (cadena.length() < longitud) {
+                return llenarEspacios(cadena, longitud);
+
+            } else {
+                return cortarEspacios(cadena, longitud);
+
+            }
+        }
+    }
+
+    public String llenarEspacios(String cadena, int longitud) {
+        return String.format("%-" + longitud + "s", cadena);
+
+    }
+
+    public String cortarEspacios(String cadena, int longitud) {
+        return cadena.substring(0, longitud);
+
+    }
     
     //Hashcode y Equals
     @Override
