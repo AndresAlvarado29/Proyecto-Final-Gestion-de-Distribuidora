@@ -9,6 +9,7 @@ import ec.edu.ups.idao.IUsuarioDAO;
 import ec.edu.ups.modelo.Usuario;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Collection;
 
 /**
  *
@@ -119,6 +120,11 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public void delete(Usuario usuario) {
         
+    }
+    
+      @Override
+    public Collection<Usuario> findAll() {
+        return null;
     }
     
     @Override

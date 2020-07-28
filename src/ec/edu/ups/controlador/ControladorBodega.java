@@ -5,10 +5,49 @@
  */
 package ec.edu.ups.controlador;
 
+import ec.edu.ups.idao.IBodegaDAO;
+import ec.edu.ups.modelo.Bodega;
+import java.util.Collection;
+import java.util.List;
+
 /**
  *
  * @author HI andres
  */
 public class ControladorBodega {
+    
+     //Objeto Telefono
+    private Bodega bodega;
+    //Objetos DAO
+    private IBodegaDAO bodegasDAO ;
+
+    //Constructor sin parametros
+    public ControladorBodega() {
+        
+    }
+
+    //Constructor con parametros
+    public ControladorBodega(IBodegaDAO bodegasDAO) {
+        this.bodegasDAO = bodegasDAO;
+    }
+    
+    //Crea un Telefono atraves de la vista y lo agrega al archivo creado en el DAO
+    public Bodega crear(Bodega bodega) {
+        bodegasDAO.create(bodega);
+        return bodega;
+    }
+    
+    //Llama al DAO para obtener Telefono y lo muestra en pantalla atraves de la vista
+    
+    
+    //Llama al DAO para actualizar un Telefono
+    public void actualizar(Bodega bodega) {
+        bodegasDAO.update(bodega);
+    }
+    
+    //Llama al DAO para eliminar un Telefono
+    public void eliminar(Bodega bodega) {
+        bodegasDAO.delete(bodega);
+    }
     
 }
