@@ -5,6 +5,9 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorUsuario;
+import ec.edu.ups.dao.UsuarioDAO;
+
 /**
  *
  * @author HI andres
@@ -12,13 +15,19 @@ package ec.edu.ups.vista;
 public class VentanaInicio extends javax.swing.JFrame {
 private VentanaIniciarSesion ventanaIniciarSesion;
 private VentanaResgistrar ventanaResgistrar;
+private ControladorUsuario controladorUsuario;
+private UsuarioDAO usuarioDAO;
+private VentanaPrincipal ventanaPrincipal;
     /**
      * Creates new form VentanaInicio
      */
     public VentanaInicio() {
         initComponents();
-        ventanaResgistrar= new VentanaResgistrar();
-        ventanaIniciarSesion=new VentanaIniciarSesion();
+        usuarioDAO=new UsuarioDAO();
+        ventanaPrincipal=new VentanaPrincipal();
+        controladorUsuario=new ControladorUsuario(usuarioDAO);
+        ventanaResgistrar= new VentanaResgistrar(controladorUsuario);
+        ventanaIniciarSesion=new VentanaIniciarSesion(controladorUsuario,ventanaPrincipal);
         //agregar ventanas internas
         jDesktopPane1.add(ventanaIniciarSesion);
         jDesktopPane1.add(ventanaResgistrar);

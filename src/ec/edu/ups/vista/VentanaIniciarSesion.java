@@ -5,6 +5,9 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorUsuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HI andres
@@ -13,10 +16,17 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
 
     private VentanaPrincipal ventanaPrincipal;
     private VentanaInicio ventanaInicio;
-    public VentanaIniciarSesion() {
+    private ControladorUsuario controladorUsuario;
+    public VentanaIniciarSesion(ControladorUsuario controladorUsuario, VentanaPrincipal ventanaPrincipal) {
         initComponents();
-        ventanaPrincipal=new VentanaPrincipal();
+        this.controladorUsuario=controladorUsuario;
+        this.ventanaPrincipal=ventanaPrincipal;
+        
     }
+
+    
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,7 +126,13 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        ventanaPrincipal.setVisible(true);
+        if (controladorUsuario.validarUsuario(txtCorreo.getText(), jContraseña.getText())) {
+            ventanaPrincipal.setVisible(true);
+            setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "No existe el usuario");
+        }
+    
         
     }//GEN-LAST:event_btnIniciarActionPerformed
 

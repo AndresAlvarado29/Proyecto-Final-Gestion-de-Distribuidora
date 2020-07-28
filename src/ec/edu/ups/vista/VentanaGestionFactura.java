@@ -31,6 +31,8 @@ public class VentanaGestionFactura extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jPanel1.setBackground(new java.awt.Color(0, 143, 227));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
