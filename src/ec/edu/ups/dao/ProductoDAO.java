@@ -38,11 +38,15 @@ public class ProductoDAO implements IProductoDAO{
     
     //archivo binario
     private RandomAccessFile archivo;
+    private int tamañoRegistro;
     
       //Constructor
     public ProductoDAO() {
+        
+        tamañoRegistro = 179;
         try {
             archivo = new RandomAccessFile("Datos/Productos.dat", "rw");
+            tamañoRegistro = 179;
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");
@@ -50,6 +54,8 @@ public class ProductoDAO implements IProductoDAO{
 
         }
     }
+    
+    
     
     
     @Override
@@ -69,6 +75,8 @@ public class ProductoDAO implements IProductoDAO{
         }
     }
 
+    
+    
     @Override
     public Producto read(String codigo) {
         return null;

@@ -31,11 +31,14 @@ public class FacturaDAO implements IFacturaDAO {
      
     //archivo binario
     private RandomAccessFile archivo;
+    private int tamañoRegistro;
     
       //Constructor
     public FacturaDAO() {
+        tamañoRegistro = 92;
         try {
             archivo = new RandomAccessFile("Datos/Facturas.dat", "rw");
+            tamañoRegistro = 92;
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");

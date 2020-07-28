@@ -18,12 +18,16 @@ public class BodegaDAO implements IBodegaDAO {
 
     //archivo binario
     private RandomAccessFile archivo;
+    private int tamañoRegistro;
+    private Bodega bodega;
     
       //Constructor
     public BodegaDAO() {
+        
+        tamañoRegistro = 83;
         try {
             archivo = new RandomAccessFile("Datos/Bodegass.dat", "rw");
-
+            tamañoRegistro = 83;
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");
             e.printStackTrace();

@@ -31,14 +31,18 @@ public class UsuarioDAO implements IUsuarioDAO {
      */
     
     
-     //archivo binario
+    //archivo binario
     private RandomAccessFile archivo;
+    private int tamañoRegistro ;
 
     //Constructor
     public UsuarioDAO() {
+        
+        tamañoRegistro = 128;
         try {
             archivo = new RandomAccessFile("Datos/Usuarios.dat", "rw");
-
+            tamañoRegistro = 128;
+            
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");
             e.printStackTrace();
@@ -122,10 +126,14 @@ public class UsuarioDAO implements IUsuarioDAO {
         
     }
     
+    
+    
       @Override
     public Collection<Usuario> findAll() {
         return null;
     }
+    
+    
     
     @Override
     public Usuario login(String cedula, String contraseña) {
@@ -153,5 +161,6 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
         return null;
     }
+    
     
 }
