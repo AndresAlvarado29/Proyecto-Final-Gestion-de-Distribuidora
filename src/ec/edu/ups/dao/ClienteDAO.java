@@ -52,7 +52,19 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public void create(Cliente cliente) {
-        
+        try {
+            archivo.seek(archivo.length());
+            archivo.writeUTF(cliente.getCorreo());
+            archivo.writeUTF(cliente.getDireccion());
+            archivo.writeUTF(cliente.getNombreDelCliente());
+            archivo.writeUTF(cliente.getRUC());
+            archivo.writeUTF(cliente.getTelefono());
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
+            e.printStackTrace();
+
+        }
     }
 
     @Override
@@ -63,6 +75,31 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public void update(Cliente cliente) {
+         try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String clienteArchivo = archivo.readUTF();
+                
+                if (cliente.getCodigoDeCliente().equals(clienteArchivo)) {
+                    archivo.writeUTF(cliente.getCorreo());
+                    archivo.writeUTF(cliente.getDireccion());
+                    archivo.writeUTF(cliente.getNombreDelCliente());
+                    archivo.writeUTF(cliente.getRUC());
+                    archivo.writeUTF(cliente.getTelefono());
+                    break;
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (update: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
 
     }
 

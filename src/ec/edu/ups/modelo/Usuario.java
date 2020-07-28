@@ -29,11 +29,20 @@ public class Usuario {
     }
     
     //Constructor con parametros
-    public Usuario(String nombre, String apellido, String cedula, String correo, String contraseña) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public Usuario(String cedula, String nombre, String apellido, String correo, String contraseña, boolean validar) {
+
+        if (validar) {
+            this.nombre = validarEspacios(nombre, 25);
+            this.apellido = validarEspacios(apellido, 25);
+            this.correo = validarEspacios(correo, 50);
+            
+        } else {
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.correo = correo;
+        }
+        
         this.cedula = cedula;
-        this.correo = correo;
         this.contraseña = contraseña;
     }
     
@@ -79,13 +88,40 @@ public class Usuario {
         this.contraseña = contraseña;
     }
     
+    public String validarEspacios(String cadena, int longitud) {
+        if (cadena.length() == longitud) {
+            return cadena;
+
+        } else {
+            if (cadena.length() < longitud) {
+                return llenarEspacios(cadena, longitud);
+
+            } else {
+                return cortarEspacios(cadena, longitud);
+
+            }
+        }
+    }
+
+    public String llenarEspacios(String cadena, int longitud) {
+        return String.format("%-" + longitud + "s", cadena);
+
+    }
+
+    public String cortarEspacios(String cadena, int longitud) {
+        return cadena.substring(0, longitud);
+
+    }
+    
   
     //hashcode 
 
+ //Metodos de la clase Object
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.cedula);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.correo);
+        hash = 53 * hash + Objects.hashCode(this.contraseña);
         return hash;
     }
 
@@ -101,7 +137,10 @@ public class Usuario {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.cedula, other.cedula)) {
+        if (!Objects.equals(this.correo, other.correo)) {
+            return false;
+        }
+        if (!Objects.equals(this.contraseña, other.contraseña)) {
             return false;
         }
         return true;

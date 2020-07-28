@@ -65,6 +65,26 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public Usuario read(String cedula) {
+         try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String cedulaArchivo = archivo.readUTF();
+                
+                if (cedula.equals(cedulaArchivo)) {
+                    return new Usuario(cedula, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF(), false);
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (read: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
         return null;
     }
 
@@ -98,7 +118,34 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public void delete(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+    
+    @Override
+    public Usuario login(String cedula, String contraseña) {
+        try {
+            int salto = 66;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String correoArchivo = archivo.readUTF();
+                String contraseñaArchivo = archivo.readUTF();
+                
+                if (correoArchivo.trim().equals(cedula) && contraseñaArchivo.equals(contraseña)) {
+                    archivo.seek(salto - 66);
+                    return new Usuario(archivo.readUTF(), archivo.readUTF().trim(), archivo.readUTF().trim(), cedula, contraseña, false);
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (login: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
+        return null;
     }
     
 }

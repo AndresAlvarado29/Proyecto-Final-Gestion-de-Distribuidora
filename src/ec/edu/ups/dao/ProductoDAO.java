@@ -39,6 +39,18 @@ public class ProductoDAO implements IProductoDAO{
     //archivo binario
     private RandomAccessFile archivo;
     
+      //Constructor
+    public ProductoDAO() {
+        try {
+            archivo = new RandomAccessFile("Datos/Productos.dat", "rw");
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura");
+            e.printStackTrace();
+
+        }
+    }
+    
     
     @Override
     public void create(Producto producto) {
@@ -65,6 +77,31 @@ public class ProductoDAO implements IProductoDAO{
 
     @Override
     public void update(Producto producto) {
+           try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String productoArchivo = archivo.readUTF();
+                
+                if (producto.getCodigoDelProducto().equals(productoArchivo)) {
+                    archivo.writeUTF(producto.getDescripcion());
+                    archivo.writeUTF(producto.getMarca());
+                    archivo.writeUTF(producto.getNombreDelProducto());
+                    archivo.writeUTF(producto.getFechaDeCaducidad());
+                    archivo.writeUTF(producto.getFechaDeElaboracion());
+                    break;
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (update: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
 
     }
 

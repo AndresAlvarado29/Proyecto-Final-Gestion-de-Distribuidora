@@ -19,6 +19,18 @@ public class BodegaDAO implements IBodegaDAO {
     //archivo binario
     private RandomAccessFile archivo;
     
+      //Constructor
+    public BodegaDAO() {
+        try {
+            archivo = new RandomAccessFile("Datos/Bodegass.dat", "rw");
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura");
+            e.printStackTrace();
+
+        }
+    }
+    
     
     @Override
     public void create(Bodega bodega) {
@@ -44,7 +56,29 @@ public class BodegaDAO implements IBodegaDAO {
 
     @Override
     public void update(Bodega bodega) {
+        try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String BodegaArchivo = archivo.readUTF();
+                
+                if (bodega.getNombre().equals(BodegaArchivo)) {
+                    archivo.writeUTF(bodega.getDireccion());
+                    archivo.writeUTF(bodega.getNombre());
+                    archivo.writeUTF(bodega.getTelefono());
+                    break;
+                    
+                }
+                salto += 128;
 
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (update: UsuarioDAO)");
+            e.printStackTrace();
+
+      }
     }
 
     @Override

@@ -7,6 +7,7 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IFacturaDAO;
 import ec.edu.ups.modelo.Factura;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 
 /**
@@ -31,9 +32,35 @@ public class FacturaDAO implements IFacturaDAO {
     //archivo binario
     private RandomAccessFile archivo;
     
+      //Constructor
+    public FacturaDAO() {
+        try {
+            archivo = new RandomAccessFile("Datos/Facturas.dat", "rw");
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura");
+            e.printStackTrace();
+
+        }
+    }
+    
     
     @Override
     public void create(Factura factura) {
+        
+        try {
+            archivo.seek(archivo.length());
+            archivo.writeUTF(factura.getDireccionAdministracion());
+            archivo.writeUTF(factura.getFechaDeSalida());
+            archivo.writeUTF(factura.getTelefonoAdministracion());
+            archivo.writeUTF(factura.getRUC());
+            
+
+        } catch (IOException e) {
+            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
+            e.printStackTrace();
+
+        }
 
     }
 
@@ -45,6 +72,31 @@ public class FacturaDAO implements IFacturaDAO {
 
     @Override
     public void update(Factura factura) {
+        
+         try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String facturaArchivo = archivo.readUTF();
+                
+                if (factura.getRUC().equals(facturaArchivo)) {
+                    archivo.writeUTF(factura.getDireccionAdministracion());
+                    archivo.writeUTF(factura.getFechaDeSalida());
+                    archivo.writeUTF(factura.getTelefonoAdministracion());
+                    archivo.writeUTF(factura.getRUC());
+                    break;
+                    
+                }
+                salto += 128;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (update: UsuarioDAO)");
+            e.printStackTrace();
+
+      }
 
     }
 
