@@ -9,12 +9,12 @@ package ec.edu.ups.vista;
  *
  * @author HI andres
  */
-public class VentanaGestionCliente extends javax.swing.JInternalFrame {
+public class VentanaGestionFactura extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VentanaGestionCliente
+     * Creates new form VentanaGestionFactura
      */
-    public VentanaGestionCliente() {
+    public VentanaGestionFactura() {
         initComponents();
     }
 
@@ -30,8 +30,6 @@ public class VentanaGestionCliente extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setClosable(true);
-
-        jPanel1.setBackground(new java.awt.Color(0, 143, 227));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

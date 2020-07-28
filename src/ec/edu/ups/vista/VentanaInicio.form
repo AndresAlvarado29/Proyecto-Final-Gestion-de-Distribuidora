@@ -8,6 +8,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Inicio"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/edu/ups/imagen/salida.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuIdioma">
           <Properties>
@@ -16,11 +26,17 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuEspa&#xf1;ol">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/edu/ups/imagen/ecuador.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Espa&#xf1;ol"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuIngles">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/ec/edu/ups/imagen/estados-unidos.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ingles"/>
               </Properties>
             </MenuItem>

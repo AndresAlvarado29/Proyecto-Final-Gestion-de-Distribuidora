@@ -41,6 +41,7 @@ private VentanaResgistrar ventanaResgistrar;
         jLabel1 = new javax.swing.JLabel();
         jMenu = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuIdioma = new javax.swing.JMenu();
         menuEspañol = new javax.swing.JMenuItem();
         menuIngles = new javax.swing.JMenuItem();
@@ -122,13 +123,20 @@ private VentanaResgistrar ventanaResgistrar;
         );
 
         jMenuInicio.setText("Inicio");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/salida.png"))); // NOI18N
+        jMenuItem1.setText("Salir");
+        jMenuInicio.add(jMenuItem1);
+
         jMenu.add(jMenuInicio);
 
         jMenuIdioma.setText("Idioma");
 
+        menuEspañol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/ecuador.png"))); // NOI18N
         menuEspañol.setText("Español");
         jMenuIdioma.add(menuEspañol);
 
+        menuIngles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/estados-unidos.png"))); // NOI18N
         menuIngles.setText("Ingles");
         jMenuIdioma.add(menuIngles);
 
@@ -202,6 +210,7 @@ private VentanaResgistrar ventanaResgistrar;
     private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jMenuIdioma;
     private javax.swing.JMenu jMenuInicio;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JMenuItem menuEspañol;

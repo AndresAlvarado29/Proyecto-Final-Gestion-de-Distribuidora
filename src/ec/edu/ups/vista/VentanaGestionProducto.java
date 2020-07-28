@@ -29,6 +29,8 @@ public class VentanaGestionProducto extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
 
+        setClosable(true);
+
         jPanel1.setBackground(new java.awt.Color(0, 143, 227));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
