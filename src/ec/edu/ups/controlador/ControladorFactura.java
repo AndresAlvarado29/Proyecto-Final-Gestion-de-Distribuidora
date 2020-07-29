@@ -14,6 +14,7 @@ import java.util.List;
  * @author HI andres
  */
 public class ControladorFactura {
+   
     //Objeto Telefono
     private Factura facturas;
     //Objetos DAO
@@ -38,13 +39,9 @@ public class ControladorFactura {
     //Llama al DAO para obtener Telefono y lo muestra en pantalla atraves de la vista
     
     
-    //Llama al DAO para actualizar un Telefono
+    //Llama al DAO para actualizar un Factura
     public void actualizar(Factura factura) {
         facturasDAO.update(factura);
     }
     
-    //Llama al DAO para eliminar un Telefono
-    public void eliminar(Factura factura) {
-        facturasDAO.delete(factura);
-    }
 }

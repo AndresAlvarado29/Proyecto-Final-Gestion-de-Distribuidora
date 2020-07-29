@@ -6,6 +6,7 @@
 package ec.edu.ups.idao;
 
 import ec.edu.ups.modelo.Factura;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,5 @@ public interface IFacturaDAO {
     public void create(Factura factura);
     public Factura read(String numero);
     public void update(Factura factura);
-    public void delete(Factura factura);
+    public List<Factura> mostrarFacturas();
 }

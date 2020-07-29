@@ -17,11 +17,13 @@ public class Factura {
     * Atributos que se utilizaran en los diferentes metodos de gestion de
     * informacion.
     */
+    
+    private String codigoFactura;
     private String fechaDeSalida;
     private String RUC;
     private String DireccionAdministracion;
     private String TelefonoAdministracion;
-    private boolean EstadoDeFactura;
+    private String EstadoDeFactura;
     
     //Constructor sin parametros
     public Factura() {    
@@ -29,7 +31,8 @@ public class Factura {
     }
     
     //Constructor con parametros
-    public Factura(String fechaDeSalida, String RUC, String DireccionAdministracion, String TelefonoAdministracion, boolean EstadoDeFactura) {
+    public Factura(String codigoFactura, String fechaDeSalida, String RUC, String DireccionAdministracion, String TelefonoAdministracion, String EstadoDeFactura) {
+        this.codigoFactura = codigoFactura;
         this.fechaDeSalida = fechaDeSalida;
         this.RUC = RUC;
         this.DireccionAdministracion = DireccionAdministracion;
@@ -37,8 +40,15 @@ public class Factura {
         this.EstadoDeFactura = EstadoDeFactura;
     }
     
-
     //Getters y setters
+    public String getCodigoFactura() {
+        return codigoFactura;
+    }
+
+    public void setCodigoFactura(String codigoFactura) {
+        this.codigoFactura = this.validarEspacios(codigoFactura, 5);
+    }
+
     public String getFechaDeSalida() {
         return fechaDeSalida;
     }
@@ -77,15 +87,15 @@ public class Factura {
         this.TelefonoAdministracion = this.validarEspacios(TelefonoAdministracion, 10);
     }
 
-    public boolean isEstadoDeFactura() {
+    public String getEstadoDeFactura() {
         return EstadoDeFactura;
     }
 
-    
-    public void setEstadoDeFactura(boolean EstadoDeFactura) {
-       String Estado = Boolean.toString(EstadoDeFactura);
-       Estado = validarEspacios(Estado, 12);
+    public void setEstadoDeFactura(String EstadoDeFactura) {
+        this.EstadoDeFactura = this.validarEspacios(EstadoDeFactura, 12);
     }
+
+
     
      public String validarEspacios(String cadena, int longitud) {
         if (cadena.length() == longitud) {

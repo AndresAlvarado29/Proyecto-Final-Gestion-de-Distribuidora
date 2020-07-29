@@ -9,6 +9,8 @@ import ec.edu.ups.idao.IBodegaDAO;
 import ec.edu.ups.modelo.Bodega;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -102,6 +104,67 @@ public class BodegaDAO implements IBodegaDAO {
 
     @Override
     public void delete(Bodega bodega) {
+
+    }
+
+    @Override
+    public List<String> findAll() {
+        
+         List<String> Lista = new ArrayList<String>();
+        
+        try {
+            int salto = 0;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String codigo = archivo.readUTF();
+                
+                Lista.add(codigo.trim());
+                
+               
+                salto = salto + 107;
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Lista;
+    }
+
+    
+    @Override
+    public List<Bodega> listarBodegas() {
+         List<Bodega> modelo = new ArrayList<Bodega>();
+        
+        try {
+        int salto = 0;
+        while (salto < archivo.length()) {
+            archivo.seek(salto);
+            
+                    String nombre = archivo.readUTF();
+                    String direccion= archivo.readUTF();
+                    String telefono = archivo.readUTF();
+                    String codigoBodega = archivo.readUTF();
+
+                    
+                    Bodega bodega = new Bodega(nombre, direccion, telefono, codigoBodega);
+                    if(codigoBodega.trim().equalsIgnoreCase("")){
+                        
+                    }else{
+                       modelo.add(bodega);
+                    }
+                    
+                    salto = salto + 107;
+                    
+        }
+        return modelo;
+        } catch (IOException e) {
+            System.out.println("Error login");
+            e.printStackTrace();
+        }
+        
+        
+        return null;
+     
 
     }
     

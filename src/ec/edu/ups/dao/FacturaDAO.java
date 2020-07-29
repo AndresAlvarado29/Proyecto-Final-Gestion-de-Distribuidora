@@ -9,6 +9,8 @@ import ec.edu.ups.idao.IFacturaDAO;
 import ec.edu.ups.modelo.Factura;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,13 +21,14 @@ public class FacturaDAO implements IFacturaDAO {
      /**
      * Tamaño del archivo:
      *
+     * codigoFactura 5 caracteres
      * fechaDeSalida 12 caracteres
      * RUC 13 caracteres
      * DireccionAdministracion 25 cracteres
      * TelefonoAdministracion 10 caracteres
      * EstadoDeFactura 12  caracteres
      *
-     * Total  77 bytes + 10 bytes extras = 87 bytes por registro
+     * Total  82 bytes + 10 bytes extras = 92 bytes por registro
      *
      */
      
@@ -53,6 +56,7 @@ public class FacturaDAO implements IFacturaDAO {
         
         try {
             archivo.seek(archivo.length());
+            archivo.writeUTF(factura.getCodigoFactura());
             archivo.writeUTF(factura.getDireccionAdministracion());
             archivo.writeUTF(factura.getFechaDeSalida());
             archivo.writeUTF(factura.getTelefonoAdministracion());
@@ -103,9 +107,40 @@ public class FacturaDAO implements IFacturaDAO {
 
     }
 
-    @Override
-    public void delete(Factura factura) {
 
+    @Override
+    public List<Factura> mostrarFacturas() {
+
+         List<Factura> lista = new ArrayList<Factura>();    
+        try {
+            long salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                
+                String codigoFactura = archivo.readUTF();
+                String fechaDeSalida = archivo.readUTF();
+                String RUC = archivo.readUTF();
+                String DireccionAdministracion = archivo.readUTF();
+                String TelefonoAdministracion = archivo.readUTF();
+                String estado = archivo.readUTF();
+                 
+                 
+                    Factura f = new Factura();
+                    
+                    lista.add(f);
+                    
+                                    
+                    
+                
+                salto = salto + 92;
+            }
+        } catch (IOException e) {
+            System.out.println("Error login");
+            e.printStackTrace();
+        }
+        
+        return lista;
     }
     
 }
