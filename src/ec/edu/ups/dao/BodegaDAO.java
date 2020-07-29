@@ -24,6 +24,21 @@ public class BodegaDAO implements IBodegaDAO {
       //Constructor
     public BodegaDAO() {
         
+     /**
+     * Tamaño del archivo:
+     *
+     * nombre  25 caracteres 
+     * direccion  50 caracteres 
+     * telefono 10 caracteres 
+     * codigo 5 caracteres
+     * numero de empleados  4 caracteres 
+     * muelles de desembarque  4 caracteres
+     * transportes 4 caracteres
+     *
+     * Total  97 bytes + 10 bytes extras = 107 bytes por registro
+     *
+     */
+        
         tamañoRegistro = 83;
         try {
             archivo = new RandomAccessFile("Datos/Bodegass.dat", "rw");

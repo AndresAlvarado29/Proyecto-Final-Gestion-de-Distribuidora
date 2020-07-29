@@ -22,10 +22,10 @@ public class FacturaDAO implements IFacturaDAO {
      * fechaDeSalida 12 caracteres
      * RUC 13 caracteres
      * DireccionAdministracion 25 cracteres
-     * TelefonoAdministracion 15 caracteres
+     * TelefonoAdministracion 10 caracteres
      * EstadoDeFactura 12  caracteres
      *
-     * Total  82 bytes + 10 bytes extras = 92 bytes por registro
+     * Total  77 bytes + 10 bytes extras = 87 bytes por registro
      *
      */
      
@@ -35,10 +35,10 @@ public class FacturaDAO implements IFacturaDAO {
     
       //Constructor
     public FacturaDAO() {
-        tamañoRegistro = 92;
+        tamañoRegistro = 87;
         try {
             archivo = new RandomAccessFile("Datos/Facturas.dat", "rw");
-            tamañoRegistro = 92;
+            tamañoRegistro = 87;
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");

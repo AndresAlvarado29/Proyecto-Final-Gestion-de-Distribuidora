@@ -24,14 +24,14 @@ public class ProductoDAO implements IProductoDAO{
      *
      * stock  10 caracteres 
      * nombre  25 caracteres 
-     * codigo 10 caracteres 
-     * precio  50 caracteres 
+     * codigo 5 caracteres 
+     * precio  5 caracteres 
      * marca  10 caracteres
      * Fecha de Elaboracion 12 caracteres
      * fecha de caducidad 12 caracteres
      * descripcion 40 caracteres
      *
-     * Total  169 bytes + 10 bytes extras = 179 bytes por registro
+     * Total  119 bytes + 10 bytes extras = 129 bytes por registro
      *
      */
     
@@ -43,10 +43,10 @@ public class ProductoDAO implements IProductoDAO{
       //Constructor
     public ProductoDAO() {
         
-        tamañoRegistro = 179;
+        tamañoRegistro = 129;
         try {
             archivo = new RandomAccessFile("Datos/Productos.dat", "rw");
-            tamañoRegistro = 179;
+            tamañoRegistro = 129;
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");

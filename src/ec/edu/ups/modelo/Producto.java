@@ -53,7 +53,8 @@ public class Producto {
     }
 
     public void setStock(int Stock) {
-        this.Stock = Stock;
+         String cantidad = Integer.toString(Stock);
+         cantidad = validarEspacios(cantidad, 10);
     }
 
     public String getNombreDelProducto() {
@@ -61,7 +62,7 @@ public class Producto {
     }
 
     public void setNombreDelProducto(String nombreDelProducto) {
-        this.nombreDelProducto = nombreDelProducto;
+        this.nombreDelProducto = this.validarEspacios(nombreDelProducto, 25);
     }
 
     public String getCodigoDelProducto() {
@@ -69,7 +70,7 @@ public class Producto {
     }
 
     public void setCodigoDelProducto(String codigoDelProducto) {
-        this.codigoDelProducto = codigoDelProducto;
+        this.codigoDelProducto = this.validarEspacios(codigoDelProducto, 5);
     }
 
     public double getPrecio() {
@@ -77,7 +78,8 @@ public class Producto {
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        String Precio = String.valueOf(precio);
+        Precio = validarEspacios(Precio, 5);
     }
 
     public String getFechaDeElaboracion() {
@@ -85,7 +87,7 @@ public class Producto {
     }
 
     public void setFechaDeElaboracion(String fechaDeElaboracion) {
-        this.fechaDeElaboracion = fechaDeElaboracion;
+        this.fechaDeElaboracion = this.validarEspacios(fechaDeElaboracion, 12);
     }
 
     public String getFechaDeCaducidad() {
@@ -93,7 +95,7 @@ public class Producto {
     }
 
     public void setFechaDeCaducidad(String fechaDeCaducidad) {
-        this.fechaDeCaducidad = fechaDeCaducidad;
+        this.fechaDeCaducidad = this.validarEspacios(fechaDeCaducidad, 12);
     }
 
     public String getMarca() {
@@ -101,7 +103,7 @@ public class Producto {
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.marca = this.validarEspacios(marca, 10);
     }
 
     public String getDescripcion() {
@@ -109,7 +111,7 @@ public class Producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = this.validarEspacios(descripcion, 40);
     }
     
      public String validarEspacios(String cadena, int longitud) {

@@ -20,23 +20,24 @@ public class Bodega {
     private String nombre;
     private String direccion;
     private String telefono;
+    private String codigo;
     private int numeroDeEmpleados;
-    private int muellesDeDesenbarque;
-    private int transportes;
+
 
     // Constructor sin parametros.
     public Bodega() {
     }
 
     // Constructor con parametros. 
-    public Bodega(String nombre, String direccion, String telefono, int numeroDeEmpleados, int muellesDeDesenbarque, int transportes) {
+    public Bodega(String nombre, String direccion, String telefono,String codigo, int numeroDeEmpleados) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.codigo = codigo;
         this.numeroDeEmpleados = numeroDeEmpleados;
-        this.muellesDeDesenbarque = muellesDeDesenbarque;
-        this.transportes = transportes;
+     
     }
+    
     
     // Getters y Setters
     public String getNombre() {
@@ -44,7 +45,7 @@ public class Bodega {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = this.validarEspacios(nombre, 25);
     }
 
     public String getDireccion() {
@@ -52,7 +53,7 @@ public class Bodega {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.direccion = this.validarEspacios(direccion, 50);
     }
 
     public String getTelefono() {
@@ -60,7 +61,15 @@ public class Bodega {
     }
 
     public void setTelefono(String telefono) {
-        this.telefono = telefono;
+        this.telefono = this.validarEspacios(telefono, 10);
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = this.validarEspacios(codigo, 5);
     }
 
     public int getNumeroDeEmpleados() {
@@ -68,24 +77,10 @@ public class Bodega {
     }
 
     public void setNumeroDeEmpleados(int numeroDeEmpleados) {
-        this.numeroDeEmpleados = numeroDeEmpleados;
+        String numeroEmpleados = Integer.toString(numeroDeEmpleados);
+        numeroEmpleados = validarEspacios(numeroEmpleados, 4);
     }
 
-    public int getMuellesDeDesenbarque() {
-        return muellesDeDesenbarque;
-    }
-
-    public void setMuellesDeDesenbarque(int muellesDeDesenbarque) {
-        this.muellesDeDesenbarque = muellesDeDesenbarque;
-    }
-
-    public int getTransportes() {
-        return transportes;
-    }
-
-    public void setTransportes(int transportes) {
-        this.transportes = transportes;
-    }
     
      public String validarEspacios(String cadena, int longitud) {
         if (cadena.length() == longitud) {
@@ -137,10 +132,5 @@ public class Bodega {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Bodega{" + "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", numeroDeEmpleados=" + numeroDeEmpleados + ", muellesDeDesenbarque=" + muellesDeDesenbarque + ", transportes=" + transportes + '}';
-    }
-    
-    
+ 
 }

@@ -25,11 +25,11 @@ public class ClienteDAO implements IClienteDAO{
      * nombre  25 caracteres 
      * RUC  13 caracteres 
      * direccion 30 caracteres 
-     * telefono  15 caracteres 
+     * telefono  10 caracteres 
      * correo  50 caracteres
-     * codigo 
+     * codigo 5 caracteres
      * 
-     * Total  123 bytes + 10 bytes extras = 133 bytes por registro
+     * Total  138 bytes + 10 bytes extras = 148 bytes por registro
      *
      */
     private RandomAccessFile archivo;

@@ -44,7 +44,7 @@ public class Cliente {
     }
 
     public void setNombreDelCliente(String NombreDelCliente) {
-        this.NombreDelCliente = NombreDelCliente;
+        this.NombreDelCliente = this.validarEspacios(NombreDelCliente, 25);
     }
 
     public String getRUC() {
@@ -52,7 +52,7 @@ public class Cliente {
     }
 
     public void setRUC(String RUC) {
-        this.RUC = RUC;
+        this.RUC = this.validarEspacios(RUC, 13);
     }
 
     public String getDireccion() {
@@ -60,7 +60,7 @@ public class Cliente {
     }
 
     public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
+        this.Direccion = this.validarEspacios(Direccion, 30);
     }
 
     public String getTelefono() {
@@ -68,7 +68,7 @@ public class Cliente {
     }
 
     public void setTelefono(String Telefono) {
-        this.Telefono = Telefono;
+        this.Telefono = this.validarEspacios(Telefono, 10);
     }
 
     public String getCorreo() {
@@ -76,7 +76,7 @@ public class Cliente {
     }
 
     public void setCorreo(String Correo) {
-        this.Correo = Correo;
+        this.Correo = this.validarEspacios(Correo, 50);
     }
 
     public String getCodigoDeCliente() {
@@ -84,7 +84,7 @@ public class Cliente {
     }
 
     public void setCodigoDeCliente(String CodigoDeCliente) {
-        this.CodigoDeCliente = CodigoDeCliente;
+        this.CodigoDeCliente = this.validarEspacios(CodigoDeCliente, 5);
     }
     
      public String validarEspacios(String cadena, int longitud) {

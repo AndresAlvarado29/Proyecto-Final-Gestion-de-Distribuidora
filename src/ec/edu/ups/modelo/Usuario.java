@@ -32,9 +32,11 @@ public class Usuario {
     public Usuario(String cedula, String nombre, String apellido, String correo, String contraseña, boolean validar) {
 
         if (validar) {
+            
             this.nombre = validarEspacios(nombre, 25);
             this.apellido = validarEspacios(apellido, 25);
             this.correo = validarEspacios(correo, 50);
+            
             
         } else {
             this.nombre = nombre;
@@ -46,8 +48,8 @@ public class Usuario {
         this.contraseña = contraseña;
     }
     
+    
     //Getters y setters
-
     public String getNombre() {
         return nombre;
     }

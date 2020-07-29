@@ -45,7 +45,7 @@ public class Factura {
 
     
     public void setFechaDeSalida(String fechaDeSalida) {
-        this.fechaDeSalida = fechaDeSalida;
+        this.fechaDeSalida = this.validarEspacios(fechaDeSalida, 12);
     }
 
     
@@ -55,7 +55,7 @@ public class Factura {
 
     
     public void setRUC(String RUC) {
-        this.RUC = RUC;
+        this.RUC = this.validarEspacios(RUC, 13);
     }
 
     public String getDireccionAdministracion() {
@@ -64,7 +64,7 @@ public class Factura {
 
     
     public void setDireccionAdministracion(String DireccionAdministracion) {
-        this.DireccionAdministracion = DireccionAdministracion;
+        this.DireccionAdministracion = this.validarEspacios(DireccionAdministracion, 25);
     }
 
     
@@ -74,7 +74,7 @@ public class Factura {
 
     
     public void setTelefonoAdministracion(String TelefonoAdministracion) {
-        this.TelefonoAdministracion = TelefonoAdministracion;
+        this.TelefonoAdministracion = this.validarEspacios(TelefonoAdministracion, 10);
     }
 
     public boolean isEstadoDeFactura() {
@@ -83,7 +83,8 @@ public class Factura {
 
     
     public void setEstadoDeFactura(boolean EstadoDeFactura) {
-        this.EstadoDeFactura = EstadoDeFactura;
+       String Estado = Boolean.toString(EstadoDeFactura);
+       Estado = validarEspacios(Estado, 12);
     }
     
      public String validarEspacios(String cadena, int longitud) {
