@@ -12,6 +12,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import ec.edu.ups.idao.IUsuarioDAO;
+import ec.edu.ups.modelo.Usuario;
 
 /**
  *
@@ -68,10 +69,31 @@ public class ClienteDAO implements IClienteDAO{
     }
 
     @Override
-    public Cliente read(String ruc) {
-        return null;
+    public Cliente read(String RUC) {
+        
+        try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String RUCArchivo = archivo.readUTF();
+                
+                if (RUC.equals(RUCArchivo)) {
+                    return new Cliente(RUC, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF(),archivo.readUTF());
+                    
+                }
+                salto += 148;
 
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (read: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
+        return null;
     }
+
 
     @Override
     public void update(Cliente cliente) {
@@ -91,7 +113,7 @@ public class ClienteDAO implements IClienteDAO{
                     break;
                     
                 }
-                salto += 128;
+                salto += 148;
 
             }
 

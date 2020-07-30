@@ -72,11 +72,32 @@ public class FacturaDAO implements IFacturaDAO {
     }
 
     @Override
-    public Factura read(String numero) {
-        return null;
+    public Factura read(String codigoFactura) {
+        
+        try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String facturaArchivo = archivo.readUTF();
+                
+                if (codigoFactura.equals(facturaArchivo)) {
+                    return new Factura(codigoFactura, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF(), archivo.readUTF().trim());
+                    
+                }
+                salto += 92;
 
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (read: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
+        return null;
     }
 
+    
     @Override
     public void update(Factura factura) {
         

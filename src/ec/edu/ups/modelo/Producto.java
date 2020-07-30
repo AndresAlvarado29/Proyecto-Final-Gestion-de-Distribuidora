@@ -34,7 +34,7 @@ public class Producto {
     
     //Constructor con parametros
 
-    public Producto(int Stock,String descripcion, String nombreDelProducto, String codigoDelProducto, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
+    public Producto(String codigoDelProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
         this.Stock = Stock;
         this.nombreDelProducto = nombreDelProducto;
         this.codigoDelProducto = codigoDelProducto;

@@ -14,7 +14,7 @@ import ec.edu.ups.modelo.Producto;
 public interface IProductoDAO {
     //Metodos CRUD
     public void create(Producto producto);
-    public Producto read(String codigo);
+    public Producto read(String codigoDelProducto);
     public void update(Producto producto);
     public void delete(Producto producto);
 }

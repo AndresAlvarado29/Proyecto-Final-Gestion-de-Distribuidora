@@ -8,6 +8,7 @@ package ec.edu.ups.dao;
 import ec.edu.ups.idao.IProductoDAO;
 import ec.edu.ups.modelo.Producto;
 import ec.edu.ups.idao.IUsuarioDAO;
+import ec.edu.ups.modelo.Usuario;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -78,7 +79,27 @@ public class ProductoDAO implements IProductoDAO{
     
     
     @Override
-    public Producto read(String codigo) {
+    public Producto read(String codigoDelProducto) {
+                try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String codigoProductoArchivo = archivo.readUTF();
+                
+                if (codigoDelProducto.equals(codigoProductoArchivo)) {
+                    return new Producto(codigoDelProducto, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readInt(), archivo.readDouble(), archivo.readUTF(), archivo.readUTF(), archivo.readUTF());
+                    
+                }
+                salto += 129;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (read: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
         return null;
 
     }
@@ -101,7 +122,7 @@ public class ProductoDAO implements IProductoDAO{
                     break;
                     
                 }
-                salto += 128;
+                salto += 129;
 
             }
 

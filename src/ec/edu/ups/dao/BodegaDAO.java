@@ -7,6 +7,7 @@ package ec.edu.ups.dao;
 
 import ec.edu.ups.idao.IBodegaDAO;
 import ec.edu.ups.modelo.Bodega;
+import ec.edu.ups.modelo.Usuario;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -70,10 +71,32 @@ public class BodegaDAO implements IBodegaDAO {
     }
 
     @Override
-    public Bodega read(String codigo) {
-        return null;
+    public Bodega read(String codigoBodega) {
+        
+        try {
+            int salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String codigoBodegaArchivo = archivo.readUTF();
+                
+                if (codigoBodega.equals(codigoBodegaArchivo)) {
+                    return new Bodega(codigoBodega, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim());
+                    
+                }
+                salto += 107;
 
+            } 
+
+        } catch (IOException e) {
+            System.out.println("Error de lectura (read: UsuarioDAO)");
+            e.printStackTrace();
+
+        }
+        return null;
     }
+
+    
 
     @Override
     public void update(Bodega bodega) {

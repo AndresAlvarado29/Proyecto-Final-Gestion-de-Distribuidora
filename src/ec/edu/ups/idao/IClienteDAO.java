@@ -14,7 +14,7 @@ import ec.edu.ups.modelo.Cliente;
 public interface IClienteDAO {
     //Metodos CRUD
     public void create(Cliente cliente);
-    public Cliente read(String ruc);
+    public Cliente read(String RUC);
     public void update(Cliente cliente);
     public void delete(Cliente cliente);
 }

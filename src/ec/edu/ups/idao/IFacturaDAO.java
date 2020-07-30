@@ -15,7 +15,7 @@ import java.util.List;
 public interface IFacturaDAO {
     //Metodos CRUD
     public void create(Factura factura);
-    public Factura read(String numero);
+    public Factura read(String codigoFactura);
     public void update(Factura factura);
     public List<Factura> mostrarFacturas();
 }
