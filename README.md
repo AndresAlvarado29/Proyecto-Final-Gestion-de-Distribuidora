@@ -8,11 +8,13 @@ OBJETIVO ALCANZADO:
 1.	Desarrollo de un diagrama de clases para el desarrollo de cómo va a funcionar la aplicación.
 ![image](https://user-images.githubusercontent.com/64883110/89015024-05ca3f00-d2dc-11ea-834d-559455a0d252.png)
 2.	Creación del repositorio compartido con su respectivo nombre “ Proyecto-Final-Gestión-Distribuidora”
-![image](https://user-images.githubusercontent.com/64883110/89015173-3f9b4580-d2dc-11ea-869f-4ec9a3b3c157.png
+![image](https://user-images.githubusercontent.com/64883110/89015173-3f9b4580-d2dc-11ea-869f-4ec9a3b3c157.png)
 3.	Creación de todos los paquetes implementando el patrón MVC Y DAO en donde se implementan cada clase del diagrama de flujo.
 ![image](https://user-images.githubusercontent.com/64883110/89015356-81c48700-d2dc-11ea-932b-55977c136c69.png)
 4.	Creación de las clases en cada paquete.
+
 Clases en el paquete ec.edu.ups.modelo
+![image](https://user-images.githubusercontent.com/64883110/89015506-c0f2d800-d2dc-11ea-8bce-cc3c069d7fb7.png)
 Clases en el paquete ec.edu.ups.controlador
 Clases en el paquete ec.edu.ups.dao y el paquete ec.edu.ups.idao
 Clases en el paquete ec.edu.ups.vista y en el paquete ec.edu.ups.idiomas
