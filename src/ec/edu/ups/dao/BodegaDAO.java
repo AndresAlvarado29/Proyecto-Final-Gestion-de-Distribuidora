@@ -20,6 +20,7 @@ import java.util.List;
 public class BodegaDAO implements IBodegaDAO {
 
     //archivo binario
+    private int codigo;
     private RandomAccessFile archivo;
     private int tamañoRegistro;
     private Bodega bodega;
@@ -41,7 +42,7 @@ public class BodegaDAO implements IBodegaDAO {
      * Total  97 bytes + 10 bytes extras = 107 bytes por registro
      *
      */
-        
+        codigo = 0;
         tamañoRegistro = 107;
         try {
             archivo = new RandomAccessFile("Datos/Bodegass.dat", "rw");
@@ -54,168 +55,206 @@ public class BodegaDAO implements IBodegaDAO {
     }
     
     
-    @Override
+     @Override
     public void create(Bodega bodega) {
-        
         try {
-            
             archivo.seek(archivo.length());
+            archivo.writeInt(bodega.getCodigo());
             archivo.writeUTF(bodega.getNombre());
             archivo.writeUTF(bodega.getDireccion());
             archivo.writeUTF(bodega.getTelefono());
-            archivo.writeUTF(bodega.getCodigo());
-            
-        } catch (IOException e) {
-            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
-            e.printStackTrace();
+            archivo.writeInt (bodega.getStock());
 
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura create: BodegaDao");
         }
-        
     }
 
     @Override
-    public Bodega read(String codigoBodega) {
-        
+    public Bodega read(int codigo) {
+        int salto = 0;
         try {
-            int salto = 0;
-            
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String codigoBodegaArchivo = archivo.readUTF();
-                
-                if (codigoBodega.equals(codigoBodegaArchivo)) {
-                    return new Bodega(codigoBodega, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim());
-                    
+                int codigoA = archivo.readInt();
+                if (codigoA == codigo) {
+                    Bodega bodega = new Bodega(archivo.readUTF().trim(), archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), codigoA);
+
+                    return bodega;
                 }
-                salto += 107;
 
-            } 
+                salto += tamañoRegistro;
+            }
 
-        } catch (IOException e) {
-            System.out.println("Error de lectura (read: UsuarioDAO)");
-            e.printStackTrace();
-
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura read:BodegaDao");
         }
         return null;
-    }
 
-    
+    }
 
     @Override
     public void update(Bodega bodega) {
+        int salto = 0;
+        int codi = bodega.getCodigo();
         try {
-            int salto = 0;
-            
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String BodegaArchivo = archivo.readUTF();
-                
-                if (bodega.getNombre().equals(BodegaArchivo)) {
-                    archivo.writeUTF(bodega.getDireccion());
+                int codigoA = archivo.readInt();
+                if (codigoA == codi) {
+
                     archivo.writeUTF(bodega.getNombre());
+                    archivo.writeUTF(bodega.getDireccion());
                     archivo.writeUTF(bodega.getTelefono());
+                    archivo.writeInt (bodega.getStock());
+
                     break;
-                    
                 }
-                salto += 107;
-
+                salto += tamañoRegistro;
             }
-
-        } catch (IOException e) {
-            System.out.println("Error de lectura (update: UsuarioDAO)");
-            e.printStackTrace();
-
-      }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura Update :BodegaDao");
+        }
     }
 
     @Override
     public void delete(Bodega bodega) {
-
         try {
-            long salto = 0;
-            int registro = 107;
-            while (salto < archivo.length()) {
-                archivo.seek(salto);
-                
-                String codigoBodegaArchivo = archivo.readUTF();
-                archivo.seek(archivo.getFilePointer() - 4);
-                
-                if (bodega.equals(codigoBodegaArchivo.trim())) {
-                    
-                   
-                  
-                    archivo.writeUTF("  ");
-                    archivo.writeUTF("                         ");
-                    archivo.writeUTF("                                               ");                  
-                  
-                    salto=archivo.length()+1;
-                    
-                }
-                salto = salto + 107;
-            }
-        } catch (IOException e) {
-            System.out.println("Error login");
-            e.printStackTrace();
-        }
-    }
-
-    
-    @Override
-    public List<String> findAll() {
-        
-         List<String> Lista = new ArrayList<String>();
-        
-        try {
+            int codi = bodega.getCodigo();
             int salto = 0;
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String codigo = archivo.readUTF();
-                
-                Lista.add(codigo.trim());
-                
-               
-                salto = salto + 107;
+                int codigoA = archivo.readInt();
+                if (codigoA == codi) {
+                    archivo.seek(salto);
+                    archivo.writeInt(0);
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(60));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeInt(0);
+                    break;
+                }
+                salto += tamañoRegistro;
             }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (IOException ex) {
+            System.out.println("Error  Delete : BodegaDao");
         }
-        return Lista;
     }
 
-    
+    public String llenarEspacios(int espacios) {
+        String aux = "";
+        return String.format("%-" + espacios + "s", aux);
+    }
+
     @Override
-    public List<Bodega> listarBodegas() {
-         List<Bodega> modelo = new ArrayList<Bodega>();
-        
+    public List<Bodega> listarTodasBodegas() {
+        List<Bodega> listaBodegas = new ArrayList<>();
         try {
-        int salto = 0;
-        while (salto < archivo.length()) {
-            archivo.seek(salto);
-            
-                    String nombre = archivo.readUTF();
-                    String direccion= archivo.readUTF();
-                    String telefono = archivo.readUTF();
-                    String codigoBodega = archivo.readUTF();
+            int salto = 0;
 
-                    
-                    Bodega bodega = new Bodega(nombre, direccion, telefono, codigoBodega);
-                    if(codigoBodega.trim().equalsIgnoreCase("")){
-                        
-                    }else{
-                       modelo.add(bodega);
-                    }
-                    
-                    salto = salto + 107;
-                    
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+
+                int valor = archivo.readInt();
+                if (valor != 0) {
+
+                    Bodega bodega = new Bodega(archivo.readUTF().trim(), archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), valor);
+                    bodega.setStock(archivo.readInt());
+                    listaBodegas.add(bodega);
+
+                }
+
+                salto += tamañoRegistro;
+            }
+            return listaBodegas;
+        } catch (IOException ex) {
+            System.out.println("error listarTodosProductos : ProductoDao");
         }
-        return modelo;
-        } catch (IOException e) {
-            System.out.println("Error login");
-            e.printStackTrace();
-        }      
-        return null;
+      return listaBodegas;
 
     }
+
+    @Override
+     public int obtenerUltimoCodigo() {
+ 
+    boolean f=false;
+        try {
+             long pos= archivo.length() - tamañoRegistro;
+             if (archivo.length()==tamañoRegistro){
+             archivo.seek(pos);
+             codigo=archivo.readInt();
+             }else if (archivo.length() > tamañoRegistro) {
+              
+              
+            while(f==false){
+                archivo.seek(pos);
+               
+               if (archivo.readInt()!=0){
+                   break;
+               }
+                pos-=tamañoRegistro;
+            }
+                archivo.seek(pos);
+                codigo=archivo.readInt();
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura");
+        }
+
+        return codigo;
+    
+    }
+    
+    
+
+    @Override
+    public Bodega buscarPorNombre(String nombre) {
+        
+        int salto = 4;
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String nomA = archivo.readUTF().trim();
+                if (nomA.equals(nombre)) {
+                    archivo.seek(salto-4);
+                    Bodega bodega = new Bodega(archivo.readUTF().trim(), archivo.readUTF().trim(),
+                            archivo.readUTF().trim(), archivo.readInt());
+
+                    return bodega;
+                }
+
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura read:BodegaDao");
+        }
+        return null;
+      
+    }
+
+    @Override
+    public void updateStock(int cantidad, String nombre) {
+     int salto=4;
+        try {
+             
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String nombreBodega =archivo.readUTF().trim();
+                if (nombreBodega.equals(nombre)) {
+                     archivo.seek((salto-4)+120);
+                    archivo.writeInt(cantidad);
+                    break;
+                }
+                salto += tamañoRegistro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura UpdateStock :BodegaDao");
+        }
+    }
+
     
 }

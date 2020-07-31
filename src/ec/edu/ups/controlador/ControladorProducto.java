@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ec.edu.ups.controlador;
+import ec.edu.ups.dao.BodegaDAO;
+import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.idao.IProductoDAO;
+import ec.edu.ups.modelo.Bodega;
 import ec.edu.ups.modelo.Producto;
 import java.util.Collection;
 import java.util.List;
@@ -15,50 +18,49 @@ import java.util.List;
  */
 public class ControladorProducto {
     //Objeto Producto
-    private Producto producto;
-    //Objetos DAO
-    private IProductoDAO productosDAO ;
+        private Bodega bodega;
+        private Producto producto;
+        private BodegaDAO bodegaDao;
+        private ProductoDAO productoDao;
 
-    //Constructor sin parametros
-    public ControladorProducto() {
+    public ControladorProducto (BodegaDAO bodegaDao, ProductoDAO productoDao) {
+        this.bodegaDao = bodegaDao;
+        this.productoDao = productoDao;
+    }
+    
+    public void crearProducto (int codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca, int codigoBodega){
+        this.producto= new Producto(codigoProducto,descripcion, nombreDelProducto,  Stock, precio,fechaDeElaboracion, fechaDeCaducidad, marca);
+        bodega=this.bodegaDao.read(codigoBodega);
+        producto.asignarBodega(bodega);
+        productoDao.create(producto);
         
     }
+    
+    public void eliminarProducto(Producto producto){
+        productoDao.delete(producto);
+    }
+    public Producto buscarProducto (int codigo){
+        Producto prod = productoDao.read(codigo);
+    return prod;
+    }
+    public void actualizarProducto(int codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca, int codigoBodega){
+         this.producto= new Producto(codigoProducto,descripcion, nombreDelProducto,  Stock, precio,fechaDeElaboracion, fechaDeCaducidad, marca);
+        bodega=this.bodegaDao.read(codigoBodega);
+        producto.asignarBodega(bodega);
+        productoDao.update(producto);
+    }
+    
+    public List<Producto> listarProductos(){
+        return productoDao.listarTodosProductos();
+    
+    }
+    public List<Producto> listarProductosBodega(int codigoBodega){
+        return productoDao.listarPorBodega(codigoBodega);
+    
+    }
+      public int obtenerSiguienteCodigo() {
+        int codigo =  productoDao.obtenerUltimoCodigo();
 
-    //Constructor con parametros
-    public ControladorProducto(IProductoDAO productosDAO) {
-        this.productosDAO = productosDAO;
-    }
-
-    //Crea un Producto atraves de la vista y lo agrega al archivo creado en el DAO
-    public Producto crear(Producto producto) {
-        productosDAO.create(producto);
-        return producto;
-    }
-    
-    //Llama al DAO para obtener Producto y lo muestra en pantalla atraves de la vista
-    
-    
-    //Llama al DAO para actualizar un Producto
-    public void actualizar(Producto producto) {
-        productosDAO.update(producto);
-    }
-    
-    //Llama al DAO para eliminar un Producto
-    public void eliminar(String codigoProducto) {
-        productosDAO.delete(codigoProducto);
-    }
-    
-    
-    public List<Producto> ListarProductosPorBodega(String codigoBo){
-        List<Producto> modelo=productosDAO.listarProductosPorBodega(codigoBo);
-        
-        return modelo;
-    }
-    
-    
-      public List<Producto> ListarProductos(){
-        List<Producto> modelo=productosDAO.listarProductos();
-        
-        return modelo;
+        return codigo;
     }
 }

@@ -14,11 +14,20 @@ import java.util.List;
  */
 public interface IBodegaDAO {
     //Metodos CRUD
-    public void create(Bodega bodega);
-    public Bodega read(String codigoBodega);
+     public void create(Bodega bodega);
+
+    public Bodega read(int codigoBodega);
+
     public void update(Bodega bodega);
+
     public void delete(Bodega bodega);
-    public List<String> findAll();
-    public List<Bodega> listarBodegas();
+    
+    public Bodega buscarPorNombre (String nombre);
+     
+    public void updateStock(int cantidad,String nombre);
+    
+    public int obtenerUltimoCodigo();
+
+    public List<Bodega> listarTodasBodegas();
     
 }

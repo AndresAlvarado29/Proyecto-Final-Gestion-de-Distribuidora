@@ -17,10 +17,12 @@ public class Bodega {
     * informacion.
     */
     
+    private int codigoBodega;
     private String nombre;
     private String direccion;
     private String telefono;
-    private String codigoBodega;
+    private int Stock;
+    
     
 
     // Constructor sin parametros.
@@ -28,7 +30,7 @@ public class Bodega {
     }
 
     // Constructor con parametros. 
-    public Bodega(String nombre, String direccion, String telefono,String codigoBodega) {
+    public Bodega(String nombre, String direccion, String telefono,int codigoBodega) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -62,16 +64,23 @@ public class Bodega {
         this.telefono = this.validarEspacios(telefono, 10);
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigoBodega;
     }
 
-    public void setCodigo(String codigoBodega) {
-        this.codigoBodega = this.validarEspacios(codigoBodega, 5);
+    public void setCodigo(int codigoBodega) {
+        this.codigoBodega = codigoBodega;
     }
 
+    public int getStock() {
+        return Stock;
+    }
 
-    
+    public void setStock(int Stock) {
+        this.Stock = Stock;
+    }
+
+  
      public String validarEspacios(String cadena, int longitud) {
         if (cadena.length() == longitud) {
             return cadena;

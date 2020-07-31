@@ -20,12 +20,14 @@ public class Producto {
     private int Stock;
     private String descripcion;
     private String nombreDelProducto;
-    private String codigoProducto;
+    private int codigoProducto;
     private double precio;
     private String fechaDeElaboracion;
     private String fechaDeCaducidad;
     private String marca;
-    private String codigoBodega;
+   
+    //Atributos de relacion
+    private Bodega bodega;
     
     //Constructor sin parametros
 
@@ -35,7 +37,7 @@ public class Producto {
     
     //Constructor con parametros
 
-    public Producto(String codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca, String codigoBodega) {
+    public Producto(int codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
         this.Stock = Stock;
         this.nombreDelProducto = nombreDelProducto;
         this.codigoProducto = codigoProducto;
@@ -44,7 +46,7 @@ public class Producto {
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.marca = marca;
         this.descripcion = descripcion;
-        this.codigoBodega = codigoBodega;
+
         
     }
     
@@ -55,8 +57,15 @@ public class Producto {
     }
 
     public void setStock(int Stock) {
-         String cantidad = Integer.toString(Stock);
-         cantidad = validarEspacios(cantidad, 10);
+         this.Stock = Stock;
+    }
+
+        public Bodega getBodega() {
+        return bodega;
+    }
+
+    public void asignarBodega(Bodega bodega) {
+        this.bodega = bodega;
     }
 
     public String getNombreDelProducto() {
@@ -67,13 +76,15 @@ public class Producto {
         this.nombreDelProducto = this.validarEspacios(nombreDelProducto, 25);
     }
 
-    public String getCodigoDelProducto() {
+    public int getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoDelProducto(String codigoDelProducto) {
-        this.codigoProducto = this.validarEspacios(codigoDelProducto, 5);
+    public void setCodigoProducto(int codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
+
+
 
     public double getPrecio() {
         return precio;
@@ -117,15 +128,6 @@ public class Producto {
     }
 
 
-    public String getCodigoBodega() {
-        return codigoBodega;
-    }
-
-    public void setCodigoBodega(String codigoBodega) {
-        this.codigoBodega = this.validarEspacios(codigoBodega, 5);
-    }
-    
-    
     
      public String validarEspacios(String cadena, int longitud) {
         if (cadena.length() == longitud) {

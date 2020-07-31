@@ -63,14 +63,7 @@ private ResourceBundle mensaje;
     }
     
     public void cargarDatosTbl() {
-        List<Bodega>lista=controladorBodega.ListarBodegas();
-        DefaultTableModel modelo = (DefaultTableModel) tblBodega.getModel();
-        modelo.setRowCount(0);
-        tblBodega.setModel(modelo);
-        for (Bodega bodega : lista) {
-            Object[] rowData = {bodega.getCodigo(), bodega.getNombre(), bodega.getDireccion(), bodega.getTelefono()};
-            modelo.addRow(rowData);
-        }
+       
         
     }
     public void limpiar(){
@@ -263,7 +256,7 @@ private ResourceBundle mensaje;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-controladorBodega.registrar(txtNombreB.getText(), txtDireccion.getText(), txtTelefono.getText(), txtCodigo.getText());
+
         cargarDatosTbl();
         limpiar();
 JOptionPane.showMessageDialog(this, "Bodega creada exitosamente");
@@ -272,7 +265,7 @@ JOptionPane.showMessageDialog(this, "Bodega creada exitosamente");
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
        int respuesta = JOptionPane.showConfirmDialog(this,"Estas seguro que deceas eliminar el telefono seleccionado" );
         if (respuesta == JOptionPane.YES_OPTION) {
-            controladorBodega.eliminar(txtCodigo.getText()); 
+             
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

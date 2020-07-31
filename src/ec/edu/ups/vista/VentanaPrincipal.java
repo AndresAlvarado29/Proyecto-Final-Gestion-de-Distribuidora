@@ -9,6 +9,7 @@ import ec.edu.ups.controlador.ControladorBodega;
 import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.dao.BodegaDAO;
 import ec.edu.ups.dao.ClienteDAO;
+import ec.edu.ups.dao.ProductoDAO;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,6 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
  private ControladorCliente controladorCliente;
  private ClienteDAO clienteDAO;
  private BodegaDAO bodegaDAO;
+ private ProductoDAO productoDAO;
  private VentanaInicio ventanaInicio;
  private Locale localizacion;
  private ResourceBundle mensaje;
@@ -39,7 +41,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controladorCliente=new ControladorCliente(clienteDAO); 
         ventanaGestionCliente=new VentanaGestionCliente(controladorCliente);
         bodegaDAO=new BodegaDAO();
-        controladorBodega=new ControladorBodega(bodegaDAO);
+        productoDAO = new ProductoDAO();
+        controladorBodega=new ControladorBodega(bodegaDAO, productoDAO);
         ventanaGestionBodega=new VentanaGestionBodega(controladorBodega);
         ventanaGestionProducto=new VentanaGestionProducto();
         ventanaGestionFactura=new VentanaGestionFactura();

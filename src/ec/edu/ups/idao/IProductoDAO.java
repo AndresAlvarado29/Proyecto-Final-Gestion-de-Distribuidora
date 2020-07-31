@@ -15,13 +15,19 @@ import java.util.List;
 public interface IProductoDAO {
     //Metodos CRUD
     public void create(Producto producto);
-    public List<Producto> read(String CodigoProducto);
+
+    public Producto read(int codigoProducto);
+
     public void update(Producto producto);
-    public void delete(String codigoProducto);
+
+    public void delete(Producto producto);
+
+    public int obtenerUltimoCodigo();
     
-    public List<Producto> listarProductos();
-    public List<String> findAll();
-    
-    public List<Producto> listarProductosPorBodega(String codigoBo);
+    public int obtenerStockBodega(int codigoBodega);
+
+    public List<Producto> listarTodosProductos();
+
+    public List<Producto> listarPorBodega(int codigoBodega);
     
 }

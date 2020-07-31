@@ -8,6 +8,7 @@ package ec.edu.ups.dao;
 import ec.edu.ups.idao.IProductoDAO;
 import ec.edu.ups.modelo.Producto;
 import ec.edu.ups.idao.IUsuarioDAO;
+import ec.edu.ups.modelo.Bodega;
 import ec.edu.ups.modelo.Usuario;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -42,9 +43,14 @@ public class ProductoDAO implements IProductoDAO{
     private RandomAccessFile archivo;
     private int tamañoRegistro;
     
+     private int codigo;
+     private BodegaDAO bodegaDao;
+    
       //Constructor
     public ProductoDAO() {
         
+        codigo = 0;
+        bodegaDao = new BodegaDAO();
         tamañoRegistro = 134;
         try {
             archivo = new RandomAccessFile("Datos/Productos.dat", "rw");
@@ -62,260 +68,207 @@ public class ProductoDAO implements IProductoDAO{
     
     @Override
     public void create(Producto producto) {
-         try {
+        try {
             archivo.seek(archivo.length());
-            archivo.writeInt(producto.getStock()); 
-            archivo.writeUTF(producto.getDescripcion());
+            archivo.writeInt(producto.getCodigoProducto());
             archivo.writeUTF(producto.getNombreDelProducto());
-            archivo.writeUTF(producto.getCodigoDelProducto());
             archivo.writeDouble(producto.getPrecio());
-            archivo.writeUTF(producto.getFechaDeElaboracion());
-            archivo.writeUTF(producto.getFechaDeCaducidad());
-            archivo.writeUTF(producto.getMarca());
+            archivo.writeInt(producto.getStock());
+            archivo.writeUTF(producto.getDescripcion());
+            archivo.writeInt(producto.getBodega().getCodigo());
 
-        } catch (IOException e) {
-            System.out.println("Error de  lectura y escritura(create:UsuarioDao)");
-            e.printStackTrace();
-
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura create: ProductoDao");
         }
     }
 
-    
+    @Override
+    public Producto read(int codigo) {
+        int salto = 0;
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoA = archivo.readInt();
+                if (codigoA == codigo) {
+                    Producto producto = new Producto(codigoA, archivo.readUTF().trim(), archivo.readUTF().trim(),archivo.readInt(), archivo.readDouble(),archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim());
+                    Bodega bodega = bodegaDao.read(archivo.readInt());
+                    producto.asignarBodega(bodega);
+                    return producto;
+                }
+
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura read:ProductoDao");
+        }
+        return null;
+
+    }
 
     @Override
     public void update(Producto producto) {
-           try {
-            int salto = 0;
-            
+        int salto = 0;
+        int codi = producto.getCodigoProducto();
+        try {
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String productoArchivo = archivo.readUTF();
-                
-                if (producto.getCodigoDelProducto().equals(productoArchivo)) {
-                    archivo.writeUTF(producto.getDescripcion());
-                    archivo.writeUTF(producto.getMarca());
+                int codigoA = archivo.readInt();
+                if (codigoA == codi) {
+
                     archivo.writeUTF(producto.getNombreDelProducto());
-                    archivo.writeUTF(producto.getFechaDeCaducidad());
-                    archivo.writeUTF(producto.getFechaDeElaboracion());
+                    archivo.writeDouble(producto.getPrecio());
+                    archivo.writeInt(producto.getStock());
+                    archivo.writeUTF(producto.getDescripcion());
+
                     break;
-                    
                 }
-                salto += 129;
-
+                salto += tamañoRegistro;
             }
-
-        } catch (IOException e) {
-            System.out.println("Error de lectura (update: UsuarioDAO)");
-            e.printStackTrace();
-
-        }
-
-    }
-
-    @Override
-    public void delete(String codigoProducto) {
-
-        try {
-            Producto p = new Producto(" ", " ", " ", 0, 0, " ", " ", "", "");
-            long salto = 0;
-            
-            while (salto < archivo.length()) {
-                
-                archivo.seek(salto);
-                
-                String codigoArchivo = archivo.readUTF();
-                System.out.println(codigoArchivo);
-                
-                archivo.seek(archivo.getFilePointer() - 4);
-                
-                System.out.println(archivo.getFilePointer());
-                
-                if (codigoProducto.equals(codigoArchivo.trim())) {
-                    
-                   
-                  
-                    archivo.writeUTF(p.getCodigoDelProducto());
-                    System.out.println(p.getCodigoDelProducto());
-                    archivo.writeUTF(p.getNombreDelProducto());
-                    archivo.writeUTF(p.getDescripcion());
-                    archivo.writeUTF(p.getFechaDeCaducidad());
-                    archivo.writeUTF(p.getFechaDeElaboracion());
-                    archivo.writeUTF(p.getMarca());
-                    archivo.writeUTF(p.getNombreDelProducto());
-            
-                    archivo.writeInt(p.getStock());
-            
-                    archivo.writeDouble(p.getPrecio());
-
-                                      
-                  
-                    salto=archivo.length()+1;
-                    
-                }
-                salto = salto + 134;
-            }
-        } catch (IOException e) {
-            System.out.println("Error login");
-            e.printStackTrace();
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura(Update: ProductoDao)");
         }
     }
 
     @Override
-    public List<Producto> listarProductos() {
-       List<Producto> modelo = new ArrayList<Producto>();
-        
-        
+    public void delete(Producto producto) {
         try {
-        int salto = 0;
-        while (salto < archivo.length()) {
-            archivo.seek(salto);
-                    
-                    String codigoProducto = archivo.readUTF();
-                    String descripcion = archivo.readUTF();
-                    String nombreDelProducto = archivo.readUTF();
-
-                    int Stock = archivo.readInt();
-                    
-                    double precio=archivo.readDouble();
-                    
-                    String fechaDeElaboracion = archivo.readUTF();
-                    String fechaDeCaducidad = archivo.readUTF();
-                    String marca = archivo.readUTF();
-                    String codigoBodega = archivo.readUTF();
-                    
-                    Producto producto = new Producto(codigoProducto, descripcion, nombreDelProducto, Stock, precio, fechaDeElaboracion, fechaDeCaducidad, marca, codigoBodega);
-                    if(codigoProducto.trim().equalsIgnoreCase("")||codigoProducto.trim().contains("f")==true){
-                        
-                    }else{
-                       modelo.add(producto);
-                    }
-                    
-                    salto = salto + 134;
-                    
-        }
-        return modelo;
-        } catch (IOException e) {
-            System.out.println("Error listar producto");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public List<String> findAll() {
-
-        List<String> Lista = new ArrayList<String>();
-        
-        try {
+            int cod = producto.getCodigoProducto();
             int salto = 0;
             while (salto < archivo.length()) {
                 archivo.seek(salto);
-                String codigoProducto = archivo.readUTF();
-                
-                Lista.add(codigoProducto.trim());
-                
-               
-                salto = salto + 134;
+                int codigoA = archivo.readInt();
+                if (codigoA == cod) {
+                    archivo.seek(salto);
+                    archivo.writeInt(0);
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeDouble(0);
+                    archivo.writeInt(0);
+                    archivo.writeUTF(llenarEspacios(80));
+                    archivo.writeInt(0);
+                    break;
+                }
+                salto += tamañoRegistro;
             }
-            
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (IOException ex) {
+            System.out.println("Error  Delete : ProductoDao");
         }
-        return Lista;
-        
+    }
+
+    public String llenarEspacios(int espacios) {
+        String aux = "";
+        return String.format("%-" + espacios + "s", aux);
     }
 
     @Override
-    public List<Producto> listarProductosPorBodega(String codigoBo) {
-
-        List<Producto> modelo = new ArrayList<Producto>();
-        
-        
-        
+    public List<Producto> listarTodosProductos() {
+        List<Producto> listaProductos = new ArrayList<>();
         try {
-        int salto = 0;
-        while (salto < archivo.length()) {
-            archivo.seek(salto);
-                    
-                    String codigoProducto = archivo.readUTF();
-                    String descripcion = archivo.readUTF();
-                    String nombreDelProducto = archivo.readUTF();
+            int salto = 0;
 
-                    int Stock = archivo.readInt();
-                    
-                    double precio=archivo.readDouble();
-                    
-                    String fechaDeElaboracion = archivo.readUTF();
-                    String fechaDeCaducidad = archivo.readUTF();
-                    String marca = archivo.readUTF();
-                    String codigoBodega = archivo.readUTF();
-                    
-                    
-                    Producto producto=new Producto(codigoProducto, descripcion, nombreDelProducto, Stock, precio, fechaDeElaboracion, fechaDeCaducidad, marca, codigoBodega);
-                    System.out.println(codigoProducto.trim().contains("f"));
-                    if(codigoProducto.trim().equalsIgnoreCase("")||codigoProducto.trim().contains("f")==true){
-                        
-                    }else{
-                        if(codigoBodega.trim().equalsIgnoreCase(codigoBo)){
-                            modelo.add(producto);
-                        }
-                       
-                    }
-                    
-                    salto = salto + 134;
-                    
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+
+                int valor = archivo.readInt();
+                if (valor > 0) {
+                    Producto producto = new Producto(valor, archivo.readUTF().trim(), archivo.readUTF().trim(),archivo.readInt(), archivo.readDouble(),archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim());
+                    Bodega bodega = bodegaDao.read(archivo.readInt());
+                    producto.asignarBodega(bodega);
+                    listaProductos.add(producto);
+
+                }
+
+                salto += tamañoRegistro;
+            }
+            return listaProductos;
+        } catch (IOException ex) {
+            System.out.println("error listarTodosProductos : ProductoDao");
         }
-        return modelo;
-        } catch (IOException e) {
-            System.out.println("Error listar producto");
-            e.printStackTrace();
-        }
-        return null;
+        return listaProductos;
+
     }
-
-  
 
     @Override
-    public List<Producto> read(String CodigoProducto) {
-        
-        List<Producto> modelo = new ArrayList<Producto>();
-
+    public int obtenerUltimoCodigo() {
+ 
+    boolean f=false;
         try {
-        int salto = 0;
-        while (salto < archivo.length()) {
-            archivo.seek(salto);
-                    
-                    String codigoProducto = archivo.readUTF();
-                    String descripcion = archivo.readUTF();
-                    String nombreDelProducto = archivo.readUTF();
+             long pos= archivo.length() - tamañoRegistro;
+             if (archivo.length()==tamañoRegistro){
+             archivo.seek(pos);
+             codigo=archivo.readInt();
+             }else if (archivo.length() > tamañoRegistro) {
+              
+              
+            while(f==false){
+                archivo.seek(pos);
+               
+               if (archivo.readInt()!=0){
+                   break;
+               }
+                pos-=tamañoRegistro;
+            }
+                archivo.seek(pos);
+                codigo=archivo.readInt();
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura");
+        }
 
-                    int Stock = archivo.readInt();
-                    
-                    double precio=archivo.readDouble();
-                    
-                    String fechaDeElaboracion = archivo.readUTF();
-                    String fechaDeCaducidad = archivo.readUTF();
-                    String marca = archivo.readUTF();
-                    String codigoBodega = archivo.readUTF();
-                    
-                    
-                    Producto producto = new Producto(codigoProducto, descripcion, nombreDelProducto, Stock, precio, fechaDeElaboracion, fechaDeCaducidad, marca, codigoBodega);
-                    if(codigoProducto.trim().equalsIgnoreCase(CodigoProducto)){
-                         modelo.add(producto);
-                    }else{
-                      
-                    }
-                
-                    salto=salto + 134;
-                    
-        }
-        return modelo;
-        } catch (IOException e) {
-            System.out.println("Error listar producto");
-            e.printStackTrace();
-        }
-        return null;
+        return codigo;
+    
     }
 
-   
+    @Override
+    public List<Producto> listarPorBodega(int codigo) {
+        List<Producto> listar = new ArrayList();
+        int salto = 125;
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoA = archivo.readInt();
+                if (codigoA == codigo) {
+                    archivo.seek(salto);
+                    archivo.seek(salto - 125);
+                    int c = archivo.readInt();
+                    if (c != 0) {
+                        Producto producto = new Producto(codigoA, archivo.readUTF().trim(), archivo.readUTF().trim(),archivo.readInt(), archivo.readDouble(),archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readUTF().trim());
+                        Bodega bodega = bodegaDao.read(archivo.readInt());
+                        producto.asignarBodega(bodega);
+                        listar.add(producto);
+                    }
+                }
+
+                salto += tamañoRegistro;
+            }
+            return listar;
+        } catch (IOException ex) {
+            System.out.println("Error de lectura y escritura listarPorBodega :ProductoDao");
+        }
+        return listar;
+
+    }
+
+    @Override
+    public int obtenerStockBodega(int codigoBodega) {
+        int stock=0;
+         Bodega bodega=bodegaDao.read(codigo);
+         int codi=bodega.getCodigo();
+        int salto = 134;
+
+        try {
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                int codigoA = archivo.readInt();
+                if (codigoA == codi) {
+                    stock++;
+                }
+                salto += tamañoRegistro;
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura o escritura(obtenerStockBodega: ProductoDao)");
+        }
+        return stock;
+    }
 }

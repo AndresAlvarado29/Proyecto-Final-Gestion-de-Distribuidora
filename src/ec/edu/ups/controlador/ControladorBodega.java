@@ -5,6 +5,8 @@
  */
 package ec.edu.ups.controlador;
 
+import ec.edu.ups.dao.BodegaDAO;
+import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.idao.IBodegaDAO;
 import ec.edu.ups.modelo.Bodega;
 import java.util.ArrayList;
@@ -17,66 +19,55 @@ import java.util.List;
  */
 public class ControladorBodega {
     
-    //Objeto Bodega
-    private Bodega bodega;
-    //Objetos DAO
-    private IBodegaDAO bodegasDAO ;
+        private ProductoDAO productoDao;
+        private Bodega bodega;
+        private BodegaDAO bodegaDao;
+  
+  public ControladorBodega( BodegaDAO bodegaDao , ProductoDAO productoDao) {
+        this.bodegaDao = bodegaDao;
+        this.productoDao=productoDao;
+    }
+  
+  public void crearBodega(String nombre, String direccion, String telefono,int codigoBodega){
+  this.bodega= new Bodega (nombre,direccion,telefono, codigoBodega);
+  bodegaDao.create(bodega);
+  }
+  
+  public void eliminarBodega(int codigo){
+  Bodega bode= bodegaDao.read(codigo);
+  bodegaDao.delete(bode);
+  }
+  
+  public void actualizarBodega(String nombre, String direccion, String telefono,int codigoBodega){
+   this.bodega= new Bodega (nombre,direccion,telefono, codigoBodega);
+  bodegaDao.update(bodega);
+  }
+  public int obtenerStockBodega(String nombreBodega){
+      Bodega b = bodegaDao.buscarPorNombre(nombreBodega);
+      return productoDao.obtenerStockBodega(b.getCodigo());
+  
+  }
+    
+    public Bodega buscarPorNombre (String nombre){
+      return bodegaDao.buscarPorNombre(nombre);
+ 
+        }
+  
+    public void actualizarStock(String nombre){
+      
+    bodegaDao.updateStock(obtenerStockBodega(nombre), nombre);
+    }
+  
+  
+    public List<Bodega> listarBodegas(){
+     return bodegaDao.listarTodasBodegas();
+  
+        }
+    
+    
+      public int obtenerSiguienteCodigo() {
+        int codigo =  bodegaDao.obtenerUltimoCodigo();
 
-    
-    //Constructor sin parametros
-    public ControladorBodega() {
-        
-    }
-
-    //Constructor con parametros
-    public ControladorBodega(IBodegaDAO bodegasDAO) {
-        this.bodegasDAO = bodegasDAO;
-    }
-    
-    //Crea una Bodega atraves de la vista y lo agrega al archivo creado en el DAO
-    public Bodega crear(Bodega bodega) {
-        bodegasDAO.create(bodega);
-        return bodega;
-    }
-    
-    public void registrar(String nombre, String direccion, String telefono, String codigoBodega) {
-        bodega = new Bodega(nombre, direccion, telefono, codigoBodega);
-        bodegasDAO.create(bodega);
-    }
-    
-    //Llama al DAO para obtener Bodega y lo muestra en pantalla atraves de la vista
-    
-    
-    //Llama al DAO para actualizar una Bodega
-    public void actualizar(Bodega bodega) {
-        bodegasDAO.update(bodega);
-    }
-    
-    //Llama al DAO para eliminar una Bodega
-    public void eliminar(String codigoBodega) {
-        bodega=new Bodega("","","",codigoBodega);
-        bodegasDAO.delete(bodega);
-    }
-    /*public String obtenerSiguienteCodigo(){
-   /* int codigo = bodegasDAO.obtenerUltimoCodigo();
-    return++codigo+"";
-    }*/
-     
-    public List<Bodega> ListarBodegas(){
-        List<Bodega> modelo=bodegasDAO.listarBodegas();
-        return modelo;
-    }
-     
-     
-    public boolean validarBodega(String codigoBodega){
-        List<String> lista=bodegasDAO.findAll();
-         for (int i = 0; i <lista.size() ; i++) {
-             if(lista.get(i).equalsIgnoreCase(codigoBodega)){
-                 return true;
-             }
-             
-         }
-        
-        return false;
+        return codigo;
     }
 }
