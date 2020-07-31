@@ -6,6 +6,10 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorBodega;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -13,12 +17,46 @@ import ec.edu.ups.controlador.ControladorBodega;
  */
 public class VentanaGestionBodega extends javax.swing.JInternalFrame {
 private ControladorBodega controladorBodega;
+private Locale localizacion;
+private ResourceBundle mensaje;
     /**
      * Creates new form VentanaGestionBodega
      */
     public VentanaGestionBodega(ControladorBodega controladorBodega) {
         initComponents();
         this.controladorBodega=controladorBodega;
+    }
+
+    public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(ResourceBundle mensaje) {
+        this.mensaje = mensaje;
+    }
+    public void cambiarIdioma(String idioma,String localidad){
+    labelCodigo.setText(mensaje.getString("Codigo"));
+    labelDireccion.setText(mensaje.getString("Direccion"));
+    labelNombre.setText(mensaje.getString("Nombre"));
+    labelTelefono.setText(mensaje.getString("Telefonos"));
+    labelTitulo.setText(mensaje.getString("BodegaT"));
+    btnActualizar.setText(mensaje.getString("Actualizar"));
+    btnBuscar.setText(mensaje.getString("Buscar"));
+    btnCrear.setText(mensaje.getString("Crear"));
+    btnEliminar.setText(mensaje.getString("Eliminar"));
+    TableColumnModel modelo = tblBodega.getColumnModel();
+    modelo.getColumn(0).setHeaderValue(mensaje.getString("Codigo"));
+    modelo.getColumn(1).setHeaderValue(mensaje.getString("Nombre"));
+    modelo.getColumn(2).setHeaderValue(mensaje.getString("Direccion"));
+    modelo.getColumn(3).setHeaderValue(mensaje.getString("Telefonos"));
     }
 
     /**
@@ -39,9 +77,9 @@ private ControladorBodega controladorBodega;
         tblBodega = new javax.swing.JTable();
         labelTitulo = new javax.swing.JLabel();
         labelCodigo = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
+        labelDireccion = new javax.swing.JLabel();
+        labelTelefono = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
@@ -98,11 +136,11 @@ private ControladorBodega controladorBodega;
 
         labelCodigo.setText("Codigo");
 
-        jLabel3.setText("Nombre");
+        labelNombre.setText("Nombre");
 
-        jLabel4.setText("Direccion");
+        labelDireccion.setText("Direccion");
 
-        jLabel5.setText("Telefono");
+        labelTelefono.setText("Telefono");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,15 +156,15 @@ private ControladorBodega controladorBodega;
                         .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(labelNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(45, 45, 45)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addComponent(labelDireccion)
+                                    .addComponent(labelTelefono))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTelefono)
@@ -158,15 +196,15 @@ private ControladorBodega controladorBodega;
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(labelNombre)
                             .addComponent(txtNombreB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
+                            .addComponent(labelDireccion)
                             .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(labelTelefono)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,6 +233,7 @@ private ControladorBodega controladorBodega;
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
 controladorBodega.registrar(txtNombreB.getText(), txtDireccion.getText(), txtTelefono.getText(), txtCodigo.getText());
+JOptionPane.showMessageDialog(this, "Bodega creada exitosamente");
     }//GEN-LAST:event_btnCrearActionPerformed
 
 
@@ -203,20 +242,16 @@ controladorBodega.registrar(txtNombreB.getText(), txtDireccion.getText(), txtTel
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCodigo;
+    private javax.swing.JLabel labelDireccion;
+    private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelTelefono;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JTable tblBodega;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
-    private javax.swing.JTextField txtNombre3;
     private javax.swing.JTextField txtNombreB;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

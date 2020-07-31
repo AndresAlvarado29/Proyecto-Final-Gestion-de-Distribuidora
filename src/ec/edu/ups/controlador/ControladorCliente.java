@@ -34,6 +34,10 @@ public class ControladorCliente {
         clientesDAO.create(cliente);
         return cliente;
     }
+    public void registrar(String nombre,String RUC, String direccion, String telefono,String correo, String codigoDeCliente) {
+        cliente = new Cliente(nombre, RUC,direccion, telefono,correo, codigoDeCliente);
+        clientesDAO.create(cliente);
+    }
     
     //Llama al DAO para obtener el cliente y lo muestra en pantalla atraves de la vista
    

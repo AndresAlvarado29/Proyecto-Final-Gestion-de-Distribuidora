@@ -37,7 +37,7 @@ public class ClienteDAO implements IClienteDAO{
     private Cliente cliente;
 
     //Constructor
-    public ClienteDAO(IUsuarioDAO usuarioDAO) {
+    public ClienteDAO() {
          tamañoRegistro = 148;
         try {
             archivo = new RandomAccessFile("Datos/Clientes.dat", "rw");

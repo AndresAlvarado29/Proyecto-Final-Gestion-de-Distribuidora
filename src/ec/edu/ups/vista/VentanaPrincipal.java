@@ -6,7 +6,9 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorBodega;
+import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.dao.BodegaDAO;
+import ec.edu.ups.dao.ClienteDAO;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -21,6 +23,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
  private VentanaGestionBodega ventanaGestionBodega;
  private VentanaGestionFactura ventanaGestionFactura;
  private ControladorBodega controladorBodega;
+ private ControladorCliente controladorCliente;
+ private ClienteDAO clienteDAO;
  private BodegaDAO bodegaDAO;
  private VentanaInicio ventanaInicio;
  private Locale localizacion;
@@ -31,11 +35,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             
     public VentanaPrincipal() {
         initComponents();
+        clienteDAO=new ClienteDAO();
+        controladorCliente=new ControladorCliente(clienteDAO); 
+        ventanaGestionCliente=new VentanaGestionCliente(controladorCliente);
         bodegaDAO=new BodegaDAO();
         controladorBodega=new ControladorBodega(bodegaDAO);
         ventanaGestionBodega=new VentanaGestionBodega(controladorBodega);
         ventanaGestionProducto=new VentanaGestionProducto();
-        ventanaGestionCliente=new VentanaGestionCliente();
         ventanaGestionFactura=new VentanaGestionFactura();
         
         //agregamos al jDesktopPane1
@@ -75,6 +81,14 @@ labelTitulo.setText(mensaje.getString("Menu"));
 jMenuInicio.setText(mensaje.getString("Inicio"));
 jMenuIdioma.setText(mensaje.getString("Idioma"));
 jMenuGestion.setText(mensaje.getString("Usuarios"));
+if(ventanaGestionBodega!=null){
+ventanaGestionBodega.setMensaje(mensaje);
+ventanaGestionBodega.cambiarIdioma(idioma, localidad);
+ventanaGestionCliente.setMensaje(mensaje);
+ventanaGestionCliente.cambiarIdioma(idioma, localidad);
+ventanaGestionProducto.setMensaje(mensaje);
+ventanaGestionProducto.cambiarIdioma(idioma,localidad);
+}
 }
     /**
      * This method is called from within the constructor to initialize the form.
