@@ -63,11 +63,14 @@ public class ProductoDAO implements IProductoDAO{
     public void create(Producto producto) {
          try {
             archivo.seek(archivo.length());
-            archivo.writeUTF(producto.getNombreDelProducto());
+            archivo.writeInt(producto.getStock()); 
             archivo.writeUTF(producto.getDescripcion());
-            archivo.writeUTF(producto.getMarca());
+            archivo.writeUTF(producto.getNombreDelProducto());
+            archivo.writeUTF(producto.getCodigoDelProducto());
+            archivo.writeDouble(producto.getPrecio());
             archivo.writeUTF(producto.getFechaDeElaboracion());
             archivo.writeUTF(producto.getFechaDeCaducidad());
+            archivo.writeUTF(producto.getMarca());
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura(create:UsuarioDao)");

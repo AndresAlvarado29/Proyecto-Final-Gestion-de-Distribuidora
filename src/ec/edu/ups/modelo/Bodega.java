@@ -28,11 +28,11 @@ public class Bodega {
     }
 
     // Constructor con parametros. 
-    public Bodega(String nombre, String direccion, String telefono,String codigo) {
+    public Bodega(String nombre, String direccion, String telefono,String codigoBodega) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.codigoBodega = codigo;
+        this.codigoBodega = codigoBodega;
         
     }
     

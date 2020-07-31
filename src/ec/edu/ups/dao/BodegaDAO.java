@@ -56,11 +56,14 @@ public class BodegaDAO implements IBodegaDAO {
     
     @Override
     public void create(Bodega bodega) {
+        
         try {
+            
             archivo.seek(archivo.length());
             archivo.writeUTF(bodega.getNombre());
             archivo.writeUTF(bodega.getDireccion());
             archivo.writeUTF(bodega.getTelefono());
+            archivo.writeUTF(bodega.getCodigo());
             
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura(create:UsuarioDao)");

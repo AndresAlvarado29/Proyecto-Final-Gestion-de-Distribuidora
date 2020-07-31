@@ -56,11 +56,13 @@ public class FacturaDAO implements IFacturaDAO {
         
         try {
             archivo.seek(archivo.length());
+            
             archivo.writeUTF(factura.getCodigoFactura());
-            archivo.writeUTF(factura.getDireccionAdministracion());
             archivo.writeUTF(factura.getFechaDeSalida());
-            archivo.writeUTF(factura.getTelefonoAdministracion());
             archivo.writeUTF(factura.getRUC());
+            archivo.writeUTF(factura.getDireccionAdministracion());
+            archivo.writeUTF(factura.getTelefonoAdministracion());
+            archivo.writeUTF(factura.getEstadoDeFactura());
             
 
         } catch (IOException e) {
@@ -162,6 +164,32 @@ public class FacturaDAO implements IFacturaDAO {
         }
         
         return lista;
+    }
+
+    @Override
+    public boolean cambiarEstado(String codigoFactura) {
+
+                try {
+            
+            long salto = 0;
+            
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                
+                String codigoArchivo = archivo.readUTF();
+                System.out.println(archivo.getFilePointer());
+                if(codigoArchivo.trim().equalsIgnoreCase(codigoFactura)){
+                    archivo.writeUTF("invalido");
+                    return true;
+                }
+                salto = salto + 128;
+            }
+            
+        } catch (IOException ex) {
+            System.out.println("error en el create FacturaDao");
+            ex.printStackTrace();
+        }
+        return false;
     }
     
 }

@@ -12,7 +12,6 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import ec.edu.ups.idao.IUsuarioDAO;
-import ec.edu.ups.modelo.Usuario;
 
 /**
  *
@@ -35,7 +34,7 @@ public class ClienteDAO implements IClienteDAO{
      */
     private RandomAccessFile archivo;
     private int tamañoRegistro;
-    private IUsuarioDAO usuarioDAO;
+    private Cliente cliente;
 
     //Constructor
     public ClienteDAO(IUsuarioDAO usuarioDAO) {
@@ -52,13 +51,16 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public void create(Cliente cliente) {
+       
         try {
             archivo.seek(archivo.length());
-            archivo.writeUTF(cliente.getCorreo());
-            archivo.writeUTF(cliente.getDireccion());
             archivo.writeUTF(cliente.getNombreDelCliente());
             archivo.writeUTF(cliente.getRUC());
+            archivo.writeUTF(cliente.getDireccion());     
             archivo.writeUTF(cliente.getTelefono());
+            archivo.writeUTF(cliente.getCorreo());
+            archivo.writeUTF(cliente.getCodigoDeCliente());
+            
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura(create:UsuarioDao)");

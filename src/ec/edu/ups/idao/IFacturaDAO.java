@@ -17,5 +17,6 @@ public interface IFacturaDAO {
     public void create(Factura factura);
     public Factura read(String codigoFactura);
     public void update(Factura factura);
+    public boolean cambiarEstado(String codigoFactura);
     public List<Factura> mostrarFacturas();
 }
