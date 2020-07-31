@@ -48,7 +48,13 @@ public class ControladorCliente {
     }
     
     //Llama al DAO para eliminar un Cliente
-    public void eliminar(Cliente cliente) {
-        clientesDAO.delete(cliente);
+    public boolean eliminar(String codigo) {
+       cliente = clientesDAO.read(codigo);
+        if(cliente!=null){
+            clientesDAO.delete(cliente);
+            return true;
+        }else{
+            return false;
+        }
     } 
 }

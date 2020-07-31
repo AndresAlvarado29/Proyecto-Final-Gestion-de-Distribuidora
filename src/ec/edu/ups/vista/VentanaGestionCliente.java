@@ -6,9 +6,11 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorCliente;
+import ec.edu.ups.modelo.Cliente;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -111,6 +113,11 @@ private ControladorCliente controladorCliente;
         btnBuscar.setText("Buscar");
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
 
@@ -138,6 +145,11 @@ private ControladorCliente controladorCliente;
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblCliente);
@@ -261,6 +273,66 @@ controladorCliente.registrar(txtNombre.getText(), txtRuc.getText(), txtDireccion
 JOptionPane.showMessageDialog(this, "Cliente creado exitosamente");
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+         String cedula = txtCodigo.getText();
+        String nombre = txtNombre.getText();
+        String apellido = txtCorreo.getText();
+        String nombreLocal = txtDireccion.getText();
+        String telefono = txtRuc.getText();
+        String direccion = txtTelefono.getText();
+
+        if (cedula.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || nombreLocal.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
+            
+        } else {
+            Cliente cliente = new Cliente(cedula, nombre, apellido, nombreLocal, telefono, direccion);
+             controladorCliente.actualizar(cliente);
+            
+                listarCliente(cliente);
+                limpiar();
+                
+                
+            
+                
+            
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        int fila = tblCliente.getSelectedRow();
+
+        String cedula = (String) tblCliente.getValueAt(fila, 0);
+        String nombre = (String) tblCliente.getValueAt(fila, 1);
+        String apellido = (String) tblCliente.getValueAt(fila, 2);
+        String nombreLocal = (String) tblCliente.getValueAt(fila, 3);
+        String teledono = (String) tblCliente.getValueAt(fila, 4);
+        String direccion = (String) tblCliente.getValueAt(fila, 5);
+
+        txtCodigo.setText(cedula);
+        txtNombre.setText(nombre);
+        txtCorreo.setText(apellido);
+        txtDireccion.setText(nombreLocal);
+        txtRuc.setText(teledono);
+        txtTelefono.setText(direccion);
+    }//GEN-LAST:event_tblClienteMouseClicked
+ public void limpiar() {
+        
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtRuc.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+        
+    }
+  public void listarCliente(Cliente cliente) {
+        DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+        modelo.setRowCount(0);
+
+        Object[] objeto = {cliente.getCodigoDeCliente().trim(), cliente.getNombreDelCliente().trim(), cliente.getCorreo().trim(), cliente.getDireccion().trim(), cliente.getTelefono().trim(), cliente.getRUC().trim()};
+        modelo.addRow(objeto);
+
+        tblCliente.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
