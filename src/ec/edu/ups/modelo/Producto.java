@@ -25,6 +25,7 @@ public class Producto {
     private String fechaDeElaboracion;
     private String fechaDeCaducidad;
     private String marca;
+    private String codigoBodega;
     
     //Constructor sin parametros
 
@@ -34,7 +35,7 @@ public class Producto {
     
     //Constructor con parametros
 
-    public Producto(String codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
+    public Producto(String codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca, String codigoBodega) {
         this.Stock = Stock;
         this.nombreDelProducto = nombreDelProducto;
         this.codigoProducto = codigoProducto;
@@ -43,6 +44,7 @@ public class Producto {
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.marca = marca;
         this.descripcion = descripcion;
+        this.codigoBodega = codigoBodega;
         
     }
     
@@ -113,6 +115,17 @@ public class Producto {
     public void setDescripcion(String descripcion) {
         this.descripcion = this.validarEspacios(descripcion, 40);
     }
+
+
+    public String getCodigoBodega() {
+        return codigoBodega;
+    }
+
+    public void setCodigoBodega(String codigoBodega) {
+        this.codigoBodega = this.validarEspacios(codigoBodega, 5);
+    }
+    
+    
     
      public String validarEspacios(String cadena, int longitud) {
         if (cadena.length() == longitud) {

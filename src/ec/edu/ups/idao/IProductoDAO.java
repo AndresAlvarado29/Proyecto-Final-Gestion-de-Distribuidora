@@ -6,6 +6,7 @@
 package ec.edu.ups.idao;
 
 import ec.edu.ups.modelo.Producto;
+import java.util.List;
 
 /**
  *
@@ -14,7 +15,13 @@ import ec.edu.ups.modelo.Producto;
 public interface IProductoDAO {
     //Metodos CRUD
     public void create(Producto producto);
-    public Producto read(String codigoProducto);
+    public List<Producto> read(String CodigoProducto);
     public void update(Producto producto);
     public void delete(String codigoProducto);
+    
+    public List<Producto> listarProductos();
+    public List<String> findAll();
+    
+    public List<Producto> listarProductosPorBodega(String codigoBo);
+    
 }
