@@ -20,7 +20,7 @@ public class Producto {
     private int Stock;
     private String descripcion;
     private String nombreDelProducto;
-    private String codigoDelProducto;
+    private String codigoProducto;
     private double precio;
     private String fechaDeElaboracion;
     private String fechaDeCaducidad;
@@ -34,10 +34,10 @@ public class Producto {
     
     //Constructor con parametros
 
-    public Producto(String codigoDelProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
+    public Producto(String codigoProducto,String descripcion, String nombreDelProducto, int Stock, double precio, String fechaDeElaboracion, String fechaDeCaducidad, String marca) {
         this.Stock = Stock;
         this.nombreDelProducto = nombreDelProducto;
-        this.codigoDelProducto = codigoDelProducto;
+        this.codigoProducto = codigoProducto;
         this.precio = precio;
         this.fechaDeElaboracion = fechaDeElaboracion;
         this.fechaDeCaducidad = fechaDeCaducidad;
@@ -66,11 +66,11 @@ public class Producto {
     }
 
     public String getCodigoDelProducto() {
-        return codigoDelProducto;
+        return codigoProducto;
     }
 
     public void setCodigoDelProducto(String codigoDelProducto) {
-        this.codigoDelProducto = this.validarEspacios(codigoDelProducto, 5);
+        this.codigoProducto = this.validarEspacios(codigoDelProducto, 5);
     }
 
     public double getPrecio() {
@@ -144,7 +144,7 @@ public class Producto {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.codigoDelProducto);
+        hash = 23 * hash + Objects.hashCode(this.codigoProducto);
         return hash;
     }
 
@@ -160,16 +160,11 @@ public class Producto {
             return false;
         }
         final Producto other = (Producto) obj;
-        if (!Objects.equals(this.codigoDelProducto, other.codigoDelProducto)) {
+        if (!Objects.equals(this.codigoProducto, other.codigoProducto)) {
             return false;
         }
         return true;
     }
     
-    //toString
-    @Override
-    public String toString() {
-        return "Producto{" + "Stock=" + Stock + ", nombreDelProducto=" + nombreDelProducto + ", codigoDelProducto=" + codigoDelProducto + ", precio=" + precio + ", fechaDeElaboracion=" + fechaDeElaboracion + ", fechaDeCaducidad=" + fechaDeCaducidad + ", marca=" + marca + '}';
-    }
     
 }

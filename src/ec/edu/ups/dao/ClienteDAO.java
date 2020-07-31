@@ -34,16 +34,15 @@ public class ClienteDAO implements IClienteDAO{
      *
      */
     private RandomAccessFile archivo;
-    private int codigo;
+    private int tamañoRegistro;
     private IUsuarioDAO usuarioDAO;
 
     //Constructor
     public ClienteDAO(IUsuarioDAO usuarioDAO) {
-
+         tamañoRegistro = 148;
         try {
             archivo = new RandomAccessFile("Datos/Clientes.dat", "rw");
-            codigo = (int) (archivo.length()/97);
-            this.usuarioDAO = usuarioDAO;
+            tamañoRegistro = 148;
 
         } catch (IOException e) {
             System.out.println("Error de lectura y escritura");
@@ -128,6 +127,31 @@ public class ClienteDAO implements IClienteDAO{
     @Override
     public void delete(Cliente cliente) {
 
+         try {
+            String codigoCliente = cliente.getCodigoDeCliente();
+            int salto = 0;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String codigoClienteArchivo = archivo.readUTF();
+                if (codigoCliente.trim().equals(codigoClienteArchivo.trim())) {
+                    archivo.writeUTF(llenarEspacios(10));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(50));
+
+                    break;
+                }
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error delete usuario");
+        }
     }
     
+    
+     public String llenarEspacios(int espacios) {
+        String aux = "";
+        return String.format("%-" + espacios + "s", aux);
+    }
 }

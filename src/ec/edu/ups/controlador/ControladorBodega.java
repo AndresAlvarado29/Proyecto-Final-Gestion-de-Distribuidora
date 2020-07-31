@@ -52,8 +52,8 @@ public class ControladorBodega {
     }
     
     //Llama al DAO para eliminar un Telefono
-    public void eliminar(Bodega bodega) {
-        bodegasDAO.delete(bodega);
+    public void eliminar(String codigoBodega) {
+        bodegasDAO.delete(codigoBodega);
     }
     /*public String obtenerSiguienteCodigo(){
    /* int codigo = bodegasDAO.obtenerUltimoCodigo();

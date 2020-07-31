@@ -44,7 +44,7 @@ public class ControladorProducto {
     }
     
     //Llama al DAO para eliminar un Telefono
-    public void eliminar(Producto producto) {
-        productosDAO.delete(producto);
+    public void eliminar(String codigoProducto) {
+        productosDAO.delete(codigoProducto);
     }
 }

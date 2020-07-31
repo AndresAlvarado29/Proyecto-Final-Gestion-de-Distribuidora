@@ -124,6 +124,26 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public void delete(Usuario usuario) {
         
+        try {
+            String cedula = usuario.getCedula();
+            int salto = 0;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                String cedulaArchivo = archivo.readUTF();
+                if (cedula.trim().equals(cedulaArchivo.trim())) {
+                    archivo.writeUTF(llenarEspacios(10));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(25));
+                    archivo.writeUTF(llenarEspacios(50));
+                    archivo.writeUTF(llenarEspacios(8));
+                    break;
+                }
+                salto += tamañoRegistro;
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error delete usuario");
+        }
     }
     
     
@@ -160,6 +180,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         }
         return null;
+    }
+    
+    public String llenarEspacios(int espacios) {
+        String aux = "";
+        return String.format("%-" + espacios + "s", aux);
     }
     
     

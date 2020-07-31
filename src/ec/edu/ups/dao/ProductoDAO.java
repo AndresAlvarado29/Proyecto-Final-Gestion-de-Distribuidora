@@ -79,7 +79,7 @@ public class ProductoDAO implements IProductoDAO{
     
     
     @Override
-    public Producto read(String codigoDelProducto) {
+    public Producto read(String codigoProducto) {
                 try {
             int salto = 0;
             
@@ -87,8 +87,8 @@ public class ProductoDAO implements IProductoDAO{
                 archivo.seek(salto);
                 String codigoProductoArchivo = archivo.readUTF();
                 
-                if (codigoDelProducto.equals(codigoProductoArchivo)) {
-                    return new Producto(codigoDelProducto, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readInt(), archivo.readDouble(), archivo.readUTF(), archivo.readUTF(), archivo.readUTF());
+                if (codigoProducto.equals(codigoProductoArchivo)) {
+                    return new Producto(codigoProducto, archivo.readUTF().trim(), archivo.readUTF().trim(), archivo.readInt(), archivo.readDouble(), archivo.readUTF(), archivo.readUTF(), archivo.readUTF());
                     
                 }
                 salto += 129;
@@ -135,8 +135,51 @@ public class ProductoDAO implements IProductoDAO{
     }
 
     @Override
-    public void delete(Producto producto) {
+    public void delete(String codigoProducto) {
 
+        try {
+            Producto p = new Producto(" ", " ", " ", 0, 0, " ", " ", "");
+            long salto = 0;
+            
+            while (salto < archivo.length()) {
+                
+                archivo.seek(salto);
+                
+                String codigoArchivo = archivo.readUTF();
+                System.out.println(codigoArchivo);
+                
+                archivo.seek(archivo.getFilePointer() - 4);
+                
+                System.out.println(archivo.getFilePointer());
+                
+                if (codigoProducto.equals(codigoArchivo.trim())) {
+                    
+                   
+                  
+                    archivo.writeUTF(p.getCodigoDelProducto());
+                    System.out.println(p.getCodigoDelProducto());
+                    archivo.writeUTF(p.getNombreDelProducto());
+                    archivo.writeUTF(p.getDescripcion());
+                    archivo.writeUTF(p.getFechaDeCaducidad());
+                    archivo.writeUTF(p.getFechaDeElaboracion());
+                    archivo.writeUTF(p.getMarca());
+                    archivo.writeUTF(p.getNombreDelProducto());
+            
+                    archivo.writeInt(p.getStock());
+            
+                    archivo.writeDouble(p.getPrecio());
+
+                                      
+                  
+                    salto=archivo.length()+1;
+                    
+                }
+                salto = salto + 129;
+            }
+        } catch (IOException e) {
+            System.out.println("Error login");
+            e.printStackTrace();
+        }
     }
     
 }

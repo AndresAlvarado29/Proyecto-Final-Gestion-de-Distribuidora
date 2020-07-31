@@ -38,10 +38,10 @@ public class FacturaDAO implements IFacturaDAO {
     
       //Constructor
     public FacturaDAO() {
-        tamañoRegistro = 87;
+        tamañoRegistro = 92;
         try {
             archivo = new RandomAccessFile("Datos/Facturas.dat", "rw");
-            tamañoRegistro = 87;
+            tamañoRegistro = 92;
 
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");

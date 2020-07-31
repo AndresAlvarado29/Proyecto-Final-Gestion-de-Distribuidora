@@ -42,10 +42,10 @@ public class BodegaDAO implements IBodegaDAO {
      *
      */
         
-        tamañoRegistro = 83;
+        tamañoRegistro = 107;
         try {
             archivo = new RandomAccessFile("Datos/Bodegass.dat", "rw");
-            tamañoRegistro = 83;
+            tamañoRegistro = 107;
         } catch (IOException e) {
             System.out.println("Error de  lectura y escritura");
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class BodegaDAO implements IBodegaDAO {
                     break;
                     
                 }
-                salto += 128;
+                salto += 107;
 
             }
 
@@ -126,10 +126,37 @@ public class BodegaDAO implements IBodegaDAO {
     }
 
     @Override
-    public void delete(Bodega bodega) {
+    public void delete(String codigoBodega) {
 
+        try {
+            long salto = 0;
+            int registro = 107;
+            while (salto < archivo.length()) {
+                archivo.seek(salto);
+                
+                String codigoBodegaArchivo = archivo.readUTF();
+                archivo.seek(archivo.getFilePointer() - 4);
+                
+                if (codigoBodega.equals(codigoBodegaArchivo.trim())) {
+                    
+                   
+                  
+                    archivo.writeUTF("  ");
+                    archivo.writeUTF("                         ");
+                    archivo.writeUTF("                                               ");                  
+                  
+                    salto=archivo.length()+1;
+                    
+                }
+                salto = salto + 107;
+            }
+        } catch (IOException e) {
+            System.out.println("Error login");
+            e.printStackTrace();
+        }
     }
 
+    
     @Override
     public List<String> findAll() {
         
@@ -183,11 +210,8 @@ public class BodegaDAO implements IBodegaDAO {
         } catch (IOException e) {
             System.out.println("Error login");
             e.printStackTrace();
-        }
-        
-        
+        }      
         return null;
-     
 
     }
     
