@@ -10,6 +10,7 @@ OBJETIVO ALCANZADO:
 2.	Creación del repositorio compartido con su respectivo nombre “ Proyecto-Final-Gestión-Distribuidora”
 ![image](https://user-images.githubusercontent.com/64883110/89015173-3f9b4580-d2dc-11ea-869f-4ec9a3b3c157.png
 3.	Creación de todos los paquetes implementando el patrón MVC Y DAO en donde se implementan cada clase del diagrama de flujo.
+![image](https://user-images.githubusercontent.com/64883110/89015356-81c48700-d2dc-11ea-932b-55977c136c69.png)
 4.	Creación de las clases en cada paquete.
 Clases en el paquete ec.edu.ups.modelo
 Clases en el paquete ec.edu.ups.controlador
