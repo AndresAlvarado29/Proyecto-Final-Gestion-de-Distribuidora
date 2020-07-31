@@ -6,6 +6,7 @@ OBJETIVO ALCANZADO:
 •	Utilizar el sistema de ser implementado usando el patrón de diseño MVC y DAO, además de utilizar los archivos binarios para la persistencia de datos.
 
 1.	Desarrollo de un diagrama de clases para el desarrollo de cómo va a funcionar la aplicación.
+![image](https://user-images.githubusercontent.com/64883110/89015024-05ca3f00-d2dc-11ea-834d-559455a0d252.png)
 2.	Creación del repositorio compartido con su respectivo nombre “ Proyecto-Final-Gestión-Distribuidora” 
 3.	Creación de todos los paquetes implementando el patrón MVC Y DAO en donde se implementan cada clase del diagrama de flujo.
 4.	Creación de las clases en cada paquete.
