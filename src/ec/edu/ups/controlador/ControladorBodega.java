@@ -54,7 +54,8 @@ public class ControladorBodega {
     
     //Llama al DAO para eliminar una Bodega
     public void eliminar(String codigoBodega) {
-        bodegasDAO.delete(codigoBodega);
+        bodega=new Bodega("","","",codigoBodega);
+        bodegasDAO.delete(bodega);
     }
     /*public String obtenerSiguienteCodigo(){
    /* int codigo = bodegasDAO.obtenerUltimoCodigo();
@@ -63,7 +64,6 @@ public class ControladorBodega {
      
     public List<Bodega> ListarBodegas(){
         List<Bodega> modelo=bodegasDAO.listarBodegas();
-        
         return modelo;
     }
      

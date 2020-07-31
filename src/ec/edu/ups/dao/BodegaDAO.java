@@ -129,7 +129,7 @@ public class BodegaDAO implements IBodegaDAO {
     }
 
     @Override
-    public void delete(String codigoBodega) {
+    public void delete(Bodega bodega) {
 
         try {
             long salto = 0;
@@ -140,7 +140,7 @@ public class BodegaDAO implements IBodegaDAO {
                 String codigoBodegaArchivo = archivo.readUTF();
                 archivo.seek(archivo.getFilePointer() - 4);
                 
-                if (codigoBodega.equals(codigoBodegaArchivo.trim())) {
+                if (bodega.equals(codigoBodegaArchivo.trim())) {
                     
                    
                   

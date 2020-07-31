@@ -17,7 +17,7 @@ public interface IBodegaDAO {
     public void create(Bodega bodega);
     public Bodega read(String codigoBodega);
     public void update(Bodega bodega);
-    public void delete(String codigoBodega);
+    public void delete(Bodega bodega);
     public List<String> findAll();
     public List<Bodega> listarBodegas();
     

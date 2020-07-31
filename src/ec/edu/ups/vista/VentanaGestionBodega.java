@@ -6,9 +6,12 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorBodega;
+import ec.edu.ups.modelo.Bodega;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -48,7 +51,7 @@ private ResourceBundle mensaje;
     labelNombre.setText(mensaje.getString("Nombre"));
     labelTelefono.setText(mensaje.getString("Telefonos"));
     labelTitulo.setText(mensaje.getString("BodegaT"));
-    btnActualizar.setText(mensaje.getString("Actualizar"));
+    btnActualiza.setText(mensaje.getString("Actualizar"));
     btnBuscar.setText(mensaje.getString("Buscar"));
     btnCrear.setText(mensaje.getString("Crear"));
     btnEliminar.setText(mensaje.getString("Eliminar"));
@@ -57,6 +60,24 @@ private ResourceBundle mensaje;
     modelo.getColumn(1).setHeaderValue(mensaje.getString("Nombre"));
     modelo.getColumn(2).setHeaderValue(mensaje.getString("Direccion"));
     modelo.getColumn(3).setHeaderValue(mensaje.getString("Telefonos"));
+    }
+    
+    public void cargarDatosTbl() {
+        List<Bodega>lista=controladorBodega.ListarBodegas();
+        DefaultTableModel modelo = (DefaultTableModel) tblBodega.getModel();
+        modelo.setRowCount(0);
+        tblBodega.setModel(modelo);
+        for (Bodega bodega : lista) {
+            Object[] rowData = {bodega.getCodigo(), bodega.getNombre(), bodega.getDireccion(), bodega.getTelefono()};
+            modelo.addRow(rowData);
+        }
+        
+    }
+    public void limpiar(){
+    txtNombreB.setText("");
+    txtDireccion.setText("");
+    txtTelefono.setText("");
+    
     }
 
     /**
@@ -71,7 +92,7 @@ private ResourceBundle mensaje;
         jPanel1 = new javax.swing.JPanel();
         btnCrear = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnActualiza = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBodega = new javax.swing.JTable();
@@ -99,9 +120,19 @@ private ResourceBundle mensaje;
 
         btnBuscar.setText("Buscar");
 
-        btnActualizar.setText("Actualizar");
+        btnActualiza.setText("Actualizar");
+        btnActualiza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizaActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         tblBodega.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,7 +207,7 @@ private ResourceBundle mensaje;
                         .addGap(12, 12, 12)
                         .addComponent(btnBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar)
+                        .addComponent(btnActualiza)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,7 +241,7 @@ private ResourceBundle mensaje;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnCrear)
-                    .addComponent(btnActualizar)
+                    .addComponent(btnActualiza)
                     .addComponent(btnEliminar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,12 +264,25 @@ private ResourceBundle mensaje;
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
 controladorBodega.registrar(txtNombreB.getText(), txtDireccion.getText(), txtTelefono.getText(), txtCodigo.getText());
+        cargarDatosTbl();
+        limpiar();
 JOptionPane.showMessageDialog(this, "Bodega creada exitosamente");
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       int respuesta = JOptionPane.showConfirmDialog(this,"Estas seguro que deceas eliminar el telefono seleccionado" );
+        if (respuesta == JOptionPane.YES_OPTION) {
+            controladorBodega.eliminar(txtCodigo.getText()); 
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnActualiza;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
