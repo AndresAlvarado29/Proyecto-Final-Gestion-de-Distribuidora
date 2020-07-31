@@ -100,9 +100,11 @@ public class Bodega {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.nombre);
+        hash = 89 * hash + Objects.hashCode(this.codigoBodega);
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -116,11 +118,12 @@ public class Bodega {
             return false;
         }
         final Bodega other = (Bodega) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
+        if (!Objects.equals(this.codigoBodega, other.codigoBodega)) {
             return false;
         }
         return true;
     }
 
+    
  
 }

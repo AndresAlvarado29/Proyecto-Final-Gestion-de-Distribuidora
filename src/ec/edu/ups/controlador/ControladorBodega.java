@@ -38,8 +38,8 @@ public class ControladorBodega {
         return bodega;
     }
     
-    public void registrar(String codigo, String nombre, String direccion, String telefono) {
-        bodega = new Bodega(codigo, nombre, direccion, telefono);
+    public void registrar(String nombre, String direccion, String telefono, String codigoBodega) {
+        bodega = new Bodega(nombre, direccion, telefono, codigoBodega);
         bodegasDAO.create(bodega);
     }
     

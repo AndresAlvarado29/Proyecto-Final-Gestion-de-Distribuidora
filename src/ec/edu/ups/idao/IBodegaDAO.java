@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IBodegaDAO {
     //Metodos CRUD
-    public void create(Bodega bodeja);
+    public void create(Bodega bodega);
     public Bodega read(String codigoBodega);
     public void update(Bodega bodega);
     public void delete(String codigoBodega);

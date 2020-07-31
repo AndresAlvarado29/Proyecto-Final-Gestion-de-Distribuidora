@@ -6,6 +6,9 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorBodega;
+import ec.edu.ups.dao.BodegaDAO;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -18,12 +21,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
  private VentanaGestionBodega ventanaGestionBodega;
  private VentanaGestionFactura ventanaGestionFactura;
  private ControladorBodega controladorBodega;
+ private BodegaDAO bodegaDAO;
  private VentanaInicio ventanaInicio;
+ private Locale localizacion;
+ private ResourceBundle mensaje;
+ 
  
     
             
     public VentanaPrincipal() {
         initComponents();
+        bodegaDAO=new BodegaDAO();
+        controladorBodega=new ControladorBodega(bodegaDAO);
         ventanaGestionBodega=new VentanaGestionBodega(controladorBodega);
         ventanaGestionProducto=new VentanaGestionProducto();
         ventanaGestionCliente=new VentanaGestionCliente();
@@ -34,8 +43,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.add(ventanaGestionProducto);
         jDesktopPane1.add(ventanaGestionCliente);
         jDesktopPane1.add(ventanaGestionFactura);
+        
+         localizacion = new Locale("es", "EC");
+     mensaje = ResourceBundle.getBundle("ec.edu.ups.idioma.mensajes", localizacion);  
     }
 
+    public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(ResourceBundle mensaje) {
+        this.mensaje = mensaje;
+    }
+    
+public void cambiarIdioma(String idioma, String localidad) {
+btnBodega.setText(mensaje.getString("Bodega"));
+btnCliente.setText(mensaje.getString("Cliente"));
+btnFactura.setText(mensaje.getString("Factura"));
+btnProducto.setText(mensaje.getString("Producto"));
+btnlistar.setText(mensaje.getString("Listar"));
+btnSalir.setText(mensaje.getString("Salir"));
+labelTitulo.setText(mensaje.getString("Menu"));
+jMenuInicio.setText(mensaje.getString("Inicio"));
+jMenuIdioma.setText(mensaje.getString("Idioma"));
+jMenuGestion.setText(mensaje.getString("Usuarios"));
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,8 +91,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnProducto = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnFactura = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        labelTitulo = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
         btnlistar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
@@ -99,13 +139,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 48)); // NOI18N
-        jLabel1.setText("Menu Principal");
+        labelTitulo.setFont(new java.awt.Font("Arial Narrow", 1, 48)); // NOI18N
+        labelTitulo.setText("Menu Principal");
 
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -129,19 +169,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(jLabel1))
+                        .addComponent(labelTitulo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addComponent(btnlistar)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton5)))
+                        .addComponent(btnSalir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addComponent(labelTitulo)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBodega)
@@ -153,7 +193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnlistar)
-                    .addComponent(jButton5))
+                    .addComponent(btnSalir))
                 .addGap(109, 109, 109))
         );
 
@@ -243,9 +283,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaGestionFactura.setVisible(true);
     }//GEN-LAST:event_btnFacturaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         setVisible(false); 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,10 +327,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFactura;
     private javax.swing.JButton btnProducto;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnlistar;
-    private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuGestion;
     private javax.swing.JMenu jMenuIdioma;
@@ -302,5 +341,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

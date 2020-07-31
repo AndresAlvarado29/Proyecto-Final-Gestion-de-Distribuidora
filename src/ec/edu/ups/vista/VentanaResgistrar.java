@@ -6,6 +6,8 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorUsuario;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,12 +16,42 @@ import javax.swing.JOptionPane;
  */
 public class VentanaResgistrar extends javax.swing.JInternalFrame {
 private ControladorUsuario controladorUsuario;
+private Locale localizacion;
+private ResourceBundle mensaje;
     /**
      * Creates new form VentanaResgistrar
      */
     public VentanaResgistrar(ControladorUsuario controladorUsuario) {
         initComponents();
         this.controladorUsuario=controladorUsuario;
+        localizacion= new Locale("es", "EC");
+       mensaje= ResourceBundle.getBundle("ec.edu.ups.idioma.mensajes",localizacion);
+    }
+
+    public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(ResourceBundle mensaje) {
+        this.mensaje = mensaje;
+    }
+    public void cambiarIdioma(String idioma,String localidad){
+    labelTituloR.setText(mensaje.getString("Registrar"));
+    labelCedula.setText(mensaje.getString("Cedula"));
+    labelNombre.setText(mensaje.getString("Nombre"));
+    labelApellido.setText(mensaje.getString("Apellido"));
+    labelCorreo.setText(mensaje.getString("Correo"));
+    labelContraseña.setText(mensaje.getString("Contraseña"));
+    btnCancelar.setText(mensaje.getString("Cancelar"));
+    btnRegistar.setText(mensaje.getString("Registrar"));
     }
 
     /**
@@ -74,10 +106,13 @@ private ControladorUsuario controladorUsuario;
 
         labelNombre.setText("Nombre");
 
+        labelApellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelApellido.setText("Apellido");
 
+        labelCorreo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelCorreo.setText("Correo Electronico");
 
+        labelContraseña.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelContraseña.setText("Contraseña");
 
         labelTituloR.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
@@ -102,9 +137,6 @@ private ControladorUsuario controladorUsuario;
                         .addGap(138, 138, 138)
                         .addComponent(labelTituloR))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(labelApellido))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,8 +155,11 @@ private ControladorUsuario controladorUsuario;
                         .addGap(84, 84, 84)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(labelContraseña)))
+                        .addGap(162, 162, 162)
+                        .addComponent(labelContraseña))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,7 +201,7 @@ private ControladorUsuario controladorUsuario;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, Short.MAX_VALUE)
         );
 
         pack();

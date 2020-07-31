@@ -7,6 +7,8 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorUsuario;
 import ec.edu.ups.dao.UsuarioDAO;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -18,6 +20,8 @@ private VentanaResgistrar ventanaResgistrar;
 private ControladorUsuario controladorUsuario;
 private UsuarioDAO usuarioDAO;
 private VentanaPrincipal ventanaPrincipal;
+private Locale localizacion;
+private ResourceBundle mensaje;
     /**
      * Creates new form VentanaInicio
      */
@@ -31,8 +35,32 @@ private VentanaPrincipal ventanaPrincipal;
         //agregar ventanas internas
         jDesktopPane1.add(ventanaIniciarSesion);
         jDesktopPane1.add(ventanaResgistrar);
+        
+       //internacionalidad
+       localizacion = new Locale("es", "EC");
+       mensaje = ResourceBundle.getBundle("ec.edu.ups.idioma.mensajes", localizacion);   
     }
-
+public void cambiarIdioma(String idioma,String localidad){
+localizacion = new Locale(idioma, localidad);
+        mensaje = ResourceBundle.getBundle("ec.edu.ups.idioma.mensajes", localizacion);
+        btnIniciarSesion.setText(mensaje.getString("IniciarSesion"));
+        btnRegistrar.setText(mensaje.getString("RegistrarUsuario"));
+        jMenuInicio.setText(mensaje.getString("Inicio"));
+        jMenuIdioma.setText(mensaje.getString("Idioma"));
+        menuEspañol.setText(mensaje.getString("Español"));
+        menuIngles.setText(mensaje.getString("Ingles"));
+        salir.setText(mensaje.getString("Salir"));
+        labelTitulo.setText(mensaje.getString("Titulo"));
+        if(ventanaIniciarSesion!=null){
+        ventanaIniciarSesion.setMensaje(mensaje);
+        ventanaIniciarSesion.cambiarIdioma(idioma, localidad);
+        ventanaResgistrar.setMensaje(mensaje);
+        ventanaResgistrar.cambiarIdioma(idioma, localidad);
+        ventanaPrincipal.setMensaje(mensaje);
+        ventanaPrincipal.cambiarIdioma(idioma, localidad);
+        }
+        
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +78,7 @@ private VentanaPrincipal ventanaPrincipal;
         jLabel1 = new javax.swing.JLabel();
         jMenu = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        salir = new javax.swing.JMenuItem();
         jMenuIdioma = new javax.swing.JMenu();
         menuEspañol = new javax.swing.JMenuItem();
         menuIngles = new javax.swing.JMenuItem();
@@ -59,6 +87,7 @@ private VentanaPrincipal ventanaPrincipal;
         setTitle("Distribuidora DTP");
 
         jPanel1.setBackground(new java.awt.Color(0, 143, 227));
+        jPanel1.setPreferredSize(new java.awt.Dimension(450, 200));
 
         btnIniciarSesion.setText("Iniciar Sesion");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +96,7 @@ private VentanaPrincipal ventanaPrincipal;
             }
         });
 
-        btnRegistrar.setText("Registrar");
+        btnRegistrar.setText("Registrar Usuario");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -84,38 +113,37 @@ private VentanaPrincipal ventanaPrincipal;
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(labelTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(btnIniciarSesion)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnRegistrar)
-                                .addGap(28, 28, 28)))
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addComponent(btnIniciarSesion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(labelTitulo)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(btnRegistrar)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
                 .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addComponent(btnIniciarSesion)
-                        .addGap(71, 71, 71)
-                        .addComponent(btnRegistrar))
+                        .addGap(65, 65, 65)
+                        .addComponent(btnRegistrar)
+                        .addGap(125, 125, 125))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(73, 73, 73))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -124,18 +152,20 @@ private VentanaPrincipal ventanaPrincipal;
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
 
         jMenuInicio.setText("Inicio");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/salida.png"))); // NOI18N
-        jMenuItem1.setText("Salir");
-        jMenuInicio.add(jMenuItem1);
+        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/salida.png"))); // NOI18N
+        salir.setText("Salir");
+        jMenuInicio.add(salir);
 
         jMenu.add(jMenuInicio);
 
@@ -143,10 +173,20 @@ private VentanaPrincipal ventanaPrincipal;
 
         menuEspañol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/ecuador.png"))); // NOI18N
         menuEspañol.setText("Español");
+        menuEspañol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEspañolActionPerformed(evt);
+            }
+        });
         jMenuIdioma.add(menuEspañol);
 
         menuIngles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ec/edu/ups/imagen/estados-unidos.png"))); // NOI18N
         menuIngles.setText("Ingles");
+        menuIngles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuInglesActionPerformed(evt);
+            }
+        });
         jMenuIdioma.add(menuIngles);
 
         jMenu.add(jMenuIdioma);
@@ -176,6 +216,16 @@ private VentanaPrincipal ventanaPrincipal;
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        ventanaResgistrar.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void menuEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEspañolActionPerformed
+       localizacion=new Locale("es","EC");
+       this.cambiarIdioma("es", "EC");
+    }//GEN-LAST:event_menuEspañolActionPerformed
+
+    private void menuInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInglesActionPerformed
+       localizacion=new Locale("en","UK");
+       this.cambiarIdioma("en", "UK"); // TODO add your handling code here:
+    }//GEN-LAST:event_menuInglesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,10 +270,10 @@ private VentanaPrincipal ventanaPrincipal;
     private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jMenuIdioma;
     private javax.swing.JMenu jMenuInicio;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelTitulo;
     private javax.swing.JMenuItem menuEspañol;
     private javax.swing.JMenuItem menuIngles;
+    private javax.swing.JMenuItem salir;
     // End of variables declaration//GEN-END:variables
 }
