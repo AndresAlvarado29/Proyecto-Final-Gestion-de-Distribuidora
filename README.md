@@ -19,6 +19,7 @@ Clases en el paquete ec.edu.ups.modelo
 
 Clases en el paquete ec.edu.ups.controlador
 
+![image](https://user-images.githubusercontent.com/64883110/89015506-c0f2d800-d2dc-11ea-8bce-cc3c069d7fb7.png)
 
 Clases en el paquete ec.edu.ups.dao y el paquete ec.edu.ups.idao
 Clases en el paquete ec.edu.ups.vista y en el paquete ec.edu.ups.idiomas
