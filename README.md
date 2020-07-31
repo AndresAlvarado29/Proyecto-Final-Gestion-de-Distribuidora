@@ -1,9 +1,14 @@
 # Proyecto-Final-Gestion-de-Distribuidora
 
 OBJETIVO ALCANZADO:
+
 •	Desarrollar una aplicación que permita la facturación de una distribuidora de productos para el hogar. 
+
 •	Realizar la gestión de cada bodega, usuario, cliente, productos y facturas existentes.
+
 •	Utilizar el sistema de ser implementado usando el patrón de diseño MVC y DAO, además de utilizar los archivos binarios para la persistencia de datos.
+
+Acatividades Desarrolladas
 
 1.	Desarrollo de un diagrama de clases para el desarrollo de cómo va a funcionar la aplicación.
 ![image](https://user-images.githubusercontent.com/64883110/89015024-05ca3f00-d2dc-11ea-834d-559455a0d252.png)
@@ -27,6 +32,7 @@ Clases en el paquete ec.edu.ups.dao y el paquete ec.edu.ups.idao
 
 Clases en el paquete ec.edu.ups.vista y en el paquete ec.edu.ups.idiomas
 
+![image](https://user-images.githubusercontent.com/64883110/89016066-b1c05a00-d2dd-11ea-9ca1-731c914f855c.png)
 
 5.	Creación de las clases en el paquete modelo con sus respectivos atributos, getters y setters.
 6.	Implementación del uso de archivos binarios en el DAO y creación de las interfaces de los IDAO.                       
@@ -36,3 +42,11 @@ Clases en el paquete ec.edu.ups.vista y en el paquete ec.edu.ups.idiomas
 10.	Internacionalización del programa a dos idiomas predeterminaos que son el español e ingles.
 11.	Implementación del Javadoc en todo el programa.
 12.	Creación de un ejecutable para la aplicación.
+
+CONCLUSIONES:
+
+•	Se ha aplicado conocer varios métodos de la clase File de Java que permite manipular directorios del sistema operativo utilizando una ruta base.
+
+•	Se ha aprendido a crear los archivos ejecutables de aplicaciones desarrolladas en este entorno.
+
+•	Se ha aprendido a documentar las aplicaciones en formato HTML.
