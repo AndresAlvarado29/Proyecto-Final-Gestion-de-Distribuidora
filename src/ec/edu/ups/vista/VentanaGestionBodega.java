@@ -219,9 +219,9 @@ private ControladorBodega controladorBodega;
         }
         tblBodega.setModel(modelo);
 }*/
-    public void cargarSiguienteCodigo(){
+    /*public void cargarSiguienteCodigo(){
 txtCodigo.setText(controladorBodega.obtenerSiguienteCodigo());
-}
+}*/
 public void activarEdicicon(){
 btnActualizar.setEnabled(true);
 btnEliminar.setEnabled(true);
@@ -235,7 +235,7 @@ txtCodigo.setText("");
 txtDireccion.setText("");
 txtNombre.setText("");
 txtTelefono.setText("");
-cargarSiguienteCodigo();
+/*cargarSiguienteCodigo();*/
 }
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
 controladorBodega.registrar(txtCodigo.getText(),txtNombre.getText(),txtDireccion.getText(),txtTelefono.getText());

@@ -15,12 +15,13 @@ import javax.swing.JOptionPane;
 public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
 
     private VentanaPrincipal ventanaPrincipal;
-    private VentanaInicio ventanaInicio;
     private ControladorUsuario controladorUsuario;
     public VentanaIniciarSesion(ControladorUsuario controladorUsuario, VentanaPrincipal ventanaPrincipal) {
         initComponents();
         this.controladorUsuario=controladorUsuario;
         this.ventanaPrincipal=ventanaPrincipal;
+       
+        
         
     }
 
@@ -129,13 +130,18 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
         if (controladorUsuario.validarUsuario(txtCorreo.getText(), jContraseña.getText())) {
             ventanaPrincipal.setVisible(true);
             setVisible(false);
+            limpiar();
+            
         }else{
             JOptionPane.showMessageDialog(this, "No existe el usuario");
         }
     
         
     }//GEN-LAST:event_btnIniciarActionPerformed
-
+public void limpiar() {   
+        txtCorreo.setText("");
+        jContraseña.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
