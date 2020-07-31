@@ -19,9 +19,11 @@ Clases en el paquete ec.edu.ups.modelo
 
 Clases en el paquete ec.edu.ups.controlador
 
-![image](https://user-images.githubusercontent.com/64883110/89015506-c0f2d800-d2dc-11ea-8bce-cc3c069d7fb7.png)
+![image](https://user-images.githubusercontent.com/64883110/89015791-48d8e200-d2dd-11ea-9f88-9c1335648179.png)
 
 Clases en el paquete ec.edu.ups.dao y el paquete ec.edu.ups.idao
+
+
 Clases en el paquete ec.edu.ups.vista y en el paquete ec.edu.ups.idiomas
 5.	Creación de las clases en el paquete modelo con sus respectivos atributos, getters y setters.
 6.	Implementación del uso de archivos binarios en el DAO y creación de las interfaces de los IDAO.                       
