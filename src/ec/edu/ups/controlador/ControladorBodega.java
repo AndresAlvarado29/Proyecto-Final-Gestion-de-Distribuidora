@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ControladorBodega {
     
-     //Objeto Telefono
+    //Objeto Bodega
     private Bodega bodega;
     //Objetos DAO
     private IBodegaDAO bodegasDAO ;
@@ -32,7 +32,7 @@ public class ControladorBodega {
         this.bodegasDAO = bodegasDAO;
     }
     
-    //Crea un Telefono atraves de la vista y lo agrega al archivo creado en el DAO
+    //Crea una Bodega atraves de la vista y lo agrega al archivo creado en el DAO
     public Bodega crear(Bodega bodega) {
         bodegasDAO.create(bodega);
         return bodega;
@@ -43,15 +43,15 @@ public class ControladorBodega {
         bodegasDAO.create(bodega);
     }
     
-    //Llama al DAO para obtener Telefono y lo muestra en pantalla atraves de la vista
+    //Llama al DAO para obtener Bodega y lo muestra en pantalla atraves de la vista
     
     
-    //Llama al DAO para actualizar un Telefono
+    //Llama al DAO para actualizar una Bodega
     public void actualizar(Bodega bodega) {
         bodegasDAO.update(bodega);
     }
     
-    //Llama al DAO para eliminar un Telefono
+    //Llama al DAO para eliminar una Bodega
     public void eliminar(String codigoBodega) {
         bodegasDAO.delete(codigoBodega);
     }

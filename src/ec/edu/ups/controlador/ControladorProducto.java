@@ -14,7 +14,7 @@ import java.util.List;
  * @author HI andres
  */
 public class ControladorProducto {
-    //Objeto Telefono
+    //Objeto Producto
     private Producto producto;
     //Objetos DAO
     private IProductoDAO productosDAO ;
@@ -29,21 +29,21 @@ public class ControladorProducto {
         this.productosDAO = productosDAO;
     }
 
-    //Crea un Telefono atraves de la vista y lo agrega al archivo creado en el DAO
+    //Crea un Producto atraves de la vista y lo agrega al archivo creado en el DAO
     public Producto crear(Producto producto) {
         productosDAO.create(producto);
         return producto;
     }
     
-    //Llama al DAO para obtener Telefono y lo muestra en pantalla atraves de la vista
+    //Llama al DAO para obtener Producto y lo muestra en pantalla atraves de la vista
     
     
-    //Llama al DAO para actualizar un Telefono
+    //Llama al DAO para actualizar un Producto
     public void actualizar(Producto producto) {
         productosDAO.update(producto);
     }
     
-    //Llama al DAO para eliminar un Telefono
+    //Llama al DAO para eliminar un Producto
     public void eliminar(String codigoProducto) {
         productosDAO.delete(codigoProducto);
     }

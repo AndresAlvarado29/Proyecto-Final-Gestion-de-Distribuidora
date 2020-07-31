@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ControladorFactura {
    
-    //Objeto Telefono
+    //Objeto Factura
     private Factura facturas;
     //Objetos DAO
     private IFacturaDAO facturasDAO ;
@@ -30,13 +30,13 @@ public class ControladorFactura {
         this.facturasDAO = facturasDAO;
     }
 
-    //Crea un Telefono atraves de la vista y lo agrega al archivo creado en el DAO
+    //Crea una Factura atraves de la vista y lo agrega al archivo creado en el DAO
     public Factura crear(Factura factura) {
         facturasDAO.create(factura);
         return factura;
     }
     
-    //Llama al DAO para obtener Telefono y lo muestra en pantalla atraves de la vista
+    //Llama al DAO para obtener la Factura y lo muestra en pantalla atraves de la vista
     
     
     //Llama al DAO para actualizar un Factura
