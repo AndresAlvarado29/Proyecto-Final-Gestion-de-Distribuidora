@@ -47,4 +47,18 @@ public class ControladorProducto {
     public void eliminar(String codigoProducto) {
         productosDAO.delete(codigoProducto);
     }
+    
+    
+    public List<Producto> ListarProductosPorBodega(String codigoBo){
+        List<Producto> modelo=productosDAO.listarProductosPorBodega(codigoBo);
+        
+        return modelo;
+    }
+    
+    
+      public List<Producto> ListarProductos(){
+        List<Producto> modelo=productosDAO.listarProductos();
+        
+        return modelo;
+    }
 }

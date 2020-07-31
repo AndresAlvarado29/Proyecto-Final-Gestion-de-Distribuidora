@@ -44,4 +44,16 @@ public class ControladorFactura {
         facturasDAO.update(factura);
     }
     
+    
+    public  List<Factura> mostrarFacturas(){
+        List<Factura> lista=facturasDAO.mostrarFacturas();
+        
+        return lista;
+    }
+     
+     
+    public void cambiarEstado(String codigo){
+        facturasDAO.cambiarEstado(codigo);
+    }
+    
 }

@@ -22,6 +22,7 @@ public class ControladorBodega {
     //Objetos DAO
     private IBodegaDAO bodegasDAO ;
 
+    
     //Constructor sin parametros
     public ControladorBodega() {
         
@@ -60,5 +61,22 @@ public class ControladorBodega {
     return++codigo+"";
     }*/
      
-    
+    public List<Bodega> ListarBodegas(){
+        List<Bodega> modelo=bodegasDAO.listarBodegas();
+        
+        return modelo;
+    }
+     
+     
+    public boolean validarBodega(String codigoBodega){
+        List<String> lista=bodegasDAO.findAll();
+         for (int i = 0; i <lista.size() ; i++) {
+             if(lista.get(i).equalsIgnoreCase(codigoBodega)){
+                 return true;
+             }
+             
+         }
+        
+        return false;
+    }
 }
